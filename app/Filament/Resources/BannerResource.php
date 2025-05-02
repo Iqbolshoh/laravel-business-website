@@ -10,14 +10,12 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class BannerResource extends Resource
 {
     protected static ?string $model = Banner::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-photo';
     protected static ?string $navigationGroup = 'Bosh sahifa';
     protected static ?int $navigationSort = 6;
 
@@ -25,7 +23,26 @@ class BannerResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('title')
+                    ->required()
+                    ->label('Title'),
+
+                Forms\Components\TextInput::make('button_text')
+                    ->nullable()
+                    ->label('Button Text'),
+
+                Forms\Components\TextInput::make('button_link')
+                    ->nullable()
+                    ->label('Button Link'),
+
+                Forms\Components\Textarea::make('description')
+                    ->required()
+                    ->label('Description'),
+
+                Forms\Components\FileUpload::make('image')
+                    ->image()
+                    ->required()
+                    ->label('Image'),
             ]);
     }
 
@@ -33,13 +50,36 @@ class BannerResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('id')
+                    ->label('ID')
+                    ->sortable(),
+
+                Tables\Columns\ImageColumn::make('image')
+                    ->label('Image')
+                    ->circular()
+                    ->sortable(),
+
+                Tables\Columns\TextColumn::make('title')
+                    ->label('Title')
+                    ->sortable()
+                    ->searchable(),
+
+                Tables\Columns\TextColumn::make('button_text')
+                    ->label('Button Text')
+                    ->default('-')
+                    ->sortable(),
+
+                Tables\Columns\TextColumn::make('button_link')
+                    ->label('Button Link')
+                    ->default('-')
+                    ->sortable(),
             ])
+
             ->filters([
-                //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make()
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -51,7 +91,6 @@ class BannerResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
         ];
     }
 
