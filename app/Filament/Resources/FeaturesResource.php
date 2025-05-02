@@ -27,7 +27,8 @@ class FeaturesResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('icon_class')
                     ->required()
-                    ->label('Ikonka class'),
+                    ->label('Ikonka class')
+                    ->disabled(),
 
                 Forms\Components\TextInput::make('title')
                     ->required()
@@ -57,13 +58,7 @@ class FeaturesResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make()
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
-            ]);
         ;
     }
 
