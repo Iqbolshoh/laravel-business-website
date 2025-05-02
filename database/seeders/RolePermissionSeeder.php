@@ -18,23 +18,21 @@ class RolePermissionSeeder extends Seeder
         */
         $config = [
             'permissions' => [
-                'profile' => ['view', 'edit', 'delete']
+                // 'profile' => ['view', 'edit', 'delete']
             ],
             'roles' => [
                 'superadmin',
-                'user'
+                // 'user'
                 // Add a new role here
             ],
             'role_permissions' => [
-                'user' => [
-                    'profile' => ['view', 'edit']
-                ],
-                // Add permissions for a new role here
+                // 'user' => [
+                //     'profile' => ['view', 'edit']
+                // ],
+                // // Add permissions for a new role here
             ],
             'user_roles' => [
-                'admin@iqbolshoh.uz' => 'superadmin',
-                'user@iqbolshoh.uz' => 'user',
-                // Add a new user here
+                'sam_ecobench@iqbolshoh.uz' => 'superadmin',
             ]
         ];
 

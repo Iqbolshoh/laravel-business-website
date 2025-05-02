@@ -17,8 +17,7 @@ class UserSeeder extends Seeder
         | This section defines all necessary users for the system
         */
         $users = [
-            ['name' => 'Super Admin', 'email' => 'admin@iqbolshoh.uz', 'password' => Hash::make('IQBOLSHOH')],
-            ['name' => 'User', 'email' => 'user@iqbolshoh.uz', 'password' => Hash::make('IQBOLSHOH')]
+            ['name' => 'Super Admin', 'email' => 'sam_ecobench@iqbolshoh.uz', 'password' => Hash::make('sam_ecobench')]
         ];
 
         /*
