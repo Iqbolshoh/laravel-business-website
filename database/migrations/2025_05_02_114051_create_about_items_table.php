@@ -12,8 +12,8 @@ return new class extends Migration {
     {
         Schema::create('about_items', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('about_id'); 
-            $table->string('bullet_point'); 
+            $table->unsignedBigInteger('about_id');
+            $table->string('bullet_point');
             $table->timestamps();
             $table->foreign('about_id')->references('id')->on('about')->onDelete('cascade');
         });
