@@ -17,7 +17,7 @@ class FeaturesResource extends Resource
 {
     protected static ?string $model = Features::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o';
+    protected static ?string $navigationIcon = 'heroicon-o-cog';
     protected static ?string $navigationGroup = 'Bosh sahifa';
     protected static ?int $navigationSort = 7;
 
