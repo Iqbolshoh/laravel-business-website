@@ -3,15 +3,12 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\FeaturesResource\Pages;
-use App\Filament\Resources\FeaturesResource\RelationManagers;
 use App\Models\Feature;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class FeaturesResource extends Resource
 {
@@ -44,36 +41,25 @@ class FeaturesResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('icon_class')
-                    ->label('Ikonka'),
-
-                Tables\Columns\TextColumn::make('title')
-                    ->label('Sarlavha'),
-
-                Tables\Columns\TextColumn::make('description')
-                    ->label('Tavsif')
-                    ->limit(50),
-            ])
-            ->filters([
+                Tables\Columns\TextColumn::make('icon_class')->label('Ikonka'),
+                Tables\Columns\TextColumn::make('title')->label('Sarlavha'),
+                Tables\Columns\TextColumn::make('description')->label('Tavsif')->limit(50),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])
-        ;
+            ->headerActions([]); // ❗ Bu yerda Create tugmasi butunlay yo‘q qilinadi
     }
 
     public static function getRelations(): array
     {
-        return [
-            //
-        ];
+        return [];
     }
 
     public static function getPages(): array
     {
         return [
             'index' => Pages\ListFeatures::route('/'),
-            'create' => Pages\CreateFeatures::route('/create'),
             'edit' => Pages\EditFeatures::route('/{record}/edit'),
         ];
     }

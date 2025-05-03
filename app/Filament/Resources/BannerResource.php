@@ -42,7 +42,13 @@ class BannerResource extends Resource
                 Forms\Components\FileUpload::make('image')
                     ->image()
                     ->required()
-                    ->label('Image'),
+                    ->label('Image')
+                    ->imageEditor()
+                    ->imageEditorMode(2)
+                    ->openable()
+                    ->downloadable()
+                    ->previewable()
+                    ->acceptedFileTypes(['image/jpeg', 'image/png'])
             ]);
     }
 
