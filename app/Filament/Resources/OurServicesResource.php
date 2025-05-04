@@ -17,7 +17,7 @@ class OurServicesResource extends Resource
 {
     protected static ?string $model = OurServices::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-sparkles';
+    protected static ?string $navigationIcon = 'heroicon-o-cube-transparent';
     protected static ?string $navigationGroup = 'Bizning xizmatlarimiz';
     protected static ?int $navigationSort = 14;
 

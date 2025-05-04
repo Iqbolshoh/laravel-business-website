@@ -3,7 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ServiceSectionsResource\Pages;
-use App\Models\ServiceSections;
+use App\Models\ServiceSection;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -16,9 +16,9 @@ use Filament\Forms\Components\FileUpload;
 
 class ServiceSectionsResource extends Resource
 {
-    protected static ?string $model = ServiceSections::class;
+    protected static ?string $model = ServiceSection::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-globe-alt';
+    protected static ?string $navigationIcon = 'heroicon-o-book-open';
     protected static ?string $navigationGroup = 'Bizning xizmatlarimiz';
     protected static ?int $navigationSort = 13;
 

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Storage;
 
-class ServiceSections extends Model
+class ServiceSection extends Model
 {
     use HasFactory;
 
