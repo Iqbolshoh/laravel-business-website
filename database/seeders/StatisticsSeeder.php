@@ -17,29 +17,29 @@ class StatisticsSeeder extends Seeder
         Statistics::create([
             'icon' => 'bi bi-emoji-smile',
             'count' => 50,
-            'title' => 'Baxtli Mijozlar',
-            'description' => 'Bizning muvaffaqiyatimiz',
+            'title' => 'Happy Clients',
+            'description' => 'Our success is measured by the satisfaction of our clients.',
         ]);
 
         Statistics::create([
             'icon' => 'bi bi-journal-richtext',
             'count' => 30,
-            'title' => 'Loyihalar',
-            'description' => 'Bizning ijodkorligimiz',
+            'title' => 'Projects',
+            'description' => 'Our creativity and innovation in action.',
         ]);
 
         Statistics::create([
             'icon' => 'bi bi-headset',
             'count' => 1453,
-            'title' => 'Qo\'llab-quvvatlash Soatlari',
-            'description' => 'Mijozlarga har doim yordam beramiz',
+            'title' => 'Support Hours',
+            'description' => 'We are always available to assist our clients.',
         ]);
 
         Statistics::create([
             'icon' => 'bi bi-people',
             'count' => 15,
-            'title' => 'Mehnatkashlar',
-            'description' => 'Bizning jamoamiz',
+            'title' => 'Hardworking Team',
+            'description' => 'Our dedicated team making it all happen.',
         ]);
 
         $this->command->info('Statistics seeded successfully!');
