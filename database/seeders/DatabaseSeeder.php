@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
         */
         $this->call(RolePermissionSeeder::class);
 
-        
+
         $this->call(FeatureSeeder::class);
 
         $this->call(AboutSeeder::class);
@@ -36,6 +36,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(StatisticsSeeder::class);
 
+        $this->call(ServiceSeeder::class);
 
     }
 }
