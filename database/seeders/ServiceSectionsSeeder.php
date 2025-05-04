@@ -2,19 +2,14 @@
 
 namespace Database\Seeders;
 
-use App\Models\ServiceSections;
 use Illuminate\Database\Seeder;
+use App\Models\ServiceSection;
 
 class ServiceSectionsSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
-        ServiceSections::create([
+        ServiceSection::create([
             'title' => 'Bizning Xizmatlarimiz',
             'text_1' => 'Bizning tajribamiz va ko\'nikmalarimiz sizga eng yaxshi xizmatni taqdim etish uchun mo\'ljallangan. Bizning xizmatlarimiz, sizga yuqori sifatli va tezkor echimlar taqdim etishga yordam beradi.',
             'image' => '',
@@ -22,6 +17,6 @@ class ServiceSectionsSeeder extends Seeder
             'text_2' => 'Mahsulotlarimizni yaratishda zamonaviy texnologiyalarni qo\'llab-quvvatlaymiz va har doim eng so\'nggi innovatsiyalarni taqdim etishga intilamiz.',
         ]);
 
-        $this->command->info('Service Sections seeded successfully!');
+        $this->command->info('Service Sections seeded successfully! 🤩');
     }
 }

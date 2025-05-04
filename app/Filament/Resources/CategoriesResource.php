@@ -19,7 +19,7 @@ class CategoriesResource extends Resource
 {
     protected static ?string $model = Category::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-folder';
+    protected static ?string $navigationIcon = 'heroicon-o-tag';
     protected static ?string $navigationGroup = 'Mahsulotlar';
     protected static ?int $navigationSort = 15;
 
