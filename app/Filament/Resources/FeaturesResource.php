@@ -41,14 +41,14 @@ class FeaturesResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('icon_class')->label('Ikonka'),
-                Tables\Columns\TextColumn::make('title')->label('Sarlavha'),
-                Tables\Columns\TextColumn::make('description')->label('Tavsif')->limit(50),
+                Tables\Columns\TextColumn::make('icon_class')->label('Ikonka')->sortable(),
+                Tables\Columns\TextColumn::make('title')->label('Sarlavha')->sortable(),
+                Tables\Columns\TextColumn::make('description')->label('Tavsif')->sortable()->limit(50),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])
-            ->headerActions([]); // ❗ Bu yerda Create tugmasi butunlay yo‘q qilinadi
+            ->headerActions([]);
     }
 
     public static function getRelations(): array

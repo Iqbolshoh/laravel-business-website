@@ -17,7 +17,6 @@ class AboutResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-information-circle';
     protected static ?string $navigationGroup = 'Biz haqimizda';
     protected static ?int $navigationSort = 8;
-    protected static ?string $navigationLabel = 'Biz haqimizda';
 
     public static function form(Form $form): Form
     {

@@ -27,13 +27,13 @@ class DatabaseSeeder extends Seeder
         */
         $this->call(RolePermissionSeeder::class);
 
-        /*
-        |--------------------------------------------------------------------------
-        | Call FeatureSeeder
-        |--------------------------------------------------------------------------
-        | This section triggers the FeatureSeeder to create homepage feature cards
-        | like "Innovatsion yechimlar", "Bepul maslahatlar", and "Kuchli tarmoq"
-        */
+        
         $this->call(FeatureSeeder::class);
+
+        $this->call(AboutSeeder::class);
+
+        $this->call(AboutItemSeeder::class);
+
+        
     }
 }
