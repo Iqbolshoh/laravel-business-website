@@ -4,7 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\MessagesResource\Pages;
 use App\Filament\Resources\MessagesResource\RelationManagers;
-use App\Models\Messages;
+use App\Models\Message;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class MessagesResource extends Resource
 {
-    protected static ?string $model = Messages::class;
+    protected static ?string $model = Message::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -23,7 +23,26 @@ class MessagesResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('sender_name')
+                    ->required(),
+
+                Forms\Components\TextInput::make('sender_email')
+                    ->email()
+                    ->required(),
+
+                Forms\Components\TextInput::make('subject')
+                    ->required(),
+
+                Forms\Components\Textarea::make('body')
+                    ->required(),
+
+                Forms\Components\Select::make('status')
+                    ->options([
+                        'new' => 'New',
+                        'read' => 'Read',
+                    ])
+                    ->required()
+                    ->default('new'),
             ]);
     }
 
@@ -31,7 +50,16 @@ class MessagesResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('sender_name')->searchable(),
+                Tables\Columns\TextColumn::make('sender_email')->searchable(),
+                Tables\Columns\TextColumn::make('subject')->limit(20)->tooltip(fn($record) => $record->subject),
+                Tables\Columns\TextColumn::make('body')->limit(50)->tooltip(fn($record) => $record->body),
+                Tables\Columns\BadgeColumn::make('status')
+                    ->colors([
+                        'primary' => 'new',
+                        'success' => 'read',
+                    ]),
+                Tables\Columns\TextColumn::make('created_at')->dateTime('Y-m-d H:i'),
             ])
             ->filters([
                 //
@@ -46,6 +74,7 @@ class MessagesResource extends Resource
             ]);
     }
 
+
     public static function getRelations(): array
     {
         return [
@@ -57,7 +86,6 @@ class MessagesResource extends Resource
     {
         return [
             'index' => Pages\ListMessages::route('/'),
-            'create' => Pages\CreateMessages::route('/create'),
             'edit' => Pages\EditMessages::route('/{record}/edit'),
         ];
     }
