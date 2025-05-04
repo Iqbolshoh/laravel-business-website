@@ -13,7 +13,7 @@ return new class extends Migration {
         Schema::create('our_services', function (Blueprint $table) {
             $table->id();
             $table->string('service_name');
-            $table->enum('skill_level', ['beginner', 'intermediate', 'expert'])->default('beginner');
+            $table->unsignedTinyInteger('skill_level');
             $table->timestamps();
         });
     }
