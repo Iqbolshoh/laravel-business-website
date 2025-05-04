@@ -41,5 +41,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ServiceSectionsSeeder::class);
 
         $this->call(OurServicesSeeder::class);
+
+        $this->call(SocialLinkSeeder::class);
     }
 }

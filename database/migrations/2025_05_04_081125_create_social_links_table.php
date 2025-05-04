@@ -10,11 +10,12 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('contact_boxes', function (Blueprint $table) {
+        Schema::create('social_links', function (Blueprint $table) {
             $table->id();
-            $table->string('label');
-            $table->string('contact_info');
-            $table->string('icon_class');
+            $table->string('title');
+            $table->string('icon');
+            $table->string('value')->nullable();
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }
@@ -24,6 +25,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('contact_boxes');
+        Schema::dropIfExists('social_links');
     }
 };
