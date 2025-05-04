@@ -14,23 +14,23 @@ class OurServicesSeeder extends Seeder
     {
         $services = [
             [
-                'service_name' => 'Hududga mos ravshda mahsulot',
+                'service_name' => 'Region-Specific Product Development',
                 'skill_level' => 95,
             ],
             [
-                'service_name' => 'Mobil tezkorlik bilan ta\'labga nisbatan taklif berish',
+                'service_name' => 'Mobile-First Rapid Response Solutions',
                 'skill_level' => 85,
             ],
             [
-                'service_name' => 'Xavfsizlik',
+                'service_name' => 'Security Services',
                 'skill_level' => 80,
             ],
             [
-                'service_name' => 'Ma’lumotlar Bazasi',
+                'service_name' => 'Database Management',
                 'skill_level' => 95,
             ],
             [
-                'service_name' => 'Kreativ Eco arxitektura',
+                'service_name' => 'Creative Eco Architecture',
                 'skill_level' => 75,
             ],
         ];
@@ -39,6 +39,6 @@ class OurServicesSeeder extends Seeder
             OurServices::create($service);
         }
 
-        $this->command->info('OurServices seeded successfully!');
+        $this->command->info('Our Services seeded successfully!');
     }
 }

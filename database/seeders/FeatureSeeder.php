@@ -9,44 +9,26 @@ class FeatureSeeder extends Seeder
 {
     public function run(): void
     {
-        /*
-        |-------------------------------------------------------------------------- 
-        | Define Feature Data
-        |-------------------------------------------------------------------------- 
-        | This section defines all features to be inserted into the database.
-        */
         $features = [
             [
                 'icon_class' => 'bi bi-bounding-box-circles',
-                'title' => 'Innovatsion yechimlar',
-                'description' => 'Bizning innovatsion yechimlarimiz hayotingizni o‘zgartirishi mumkin.',
+                'title' => 'Innovative Solutions',
+                'description' => 'Our innovative solutions are designed to transform your life and business.',
             ],
             [
                 'icon_class' => 'bi bi-calendar4-week',
-                'title' => 'Bepul maslahatlar',
-                'description' => 'Bizning mutaxassislarimizdan bepul maslahatlar oling va rivojlaning.',
+                'title' => 'Free Consultations',
+                'description' => 'Get expert advice from our team without any cost and grow faster.',
             ],
             [
                 'icon_class' => 'bi bi-broadcast',
-                'title' => 'Kuchli tarmoq',
-                'description' => 'Bizning tarmog‘imiz orqali ko‘plab imkoniyatlarga ega bo‘ling.',
+                'title' => 'Powerful Network',
+                'description' => 'Gain access to countless opportunities through our strong network.',
             ],
         ];
 
-        /*
-        |-------------------------------------------------------------------------- 
-        | Insert Features into Database
-        |-------------------------------------------------------------------------- 
-        | This section inserts the feature data into the `features` table.
-        */
         collect($features)->each(fn($feature) => Feature::create($feature));
 
-        /*
-        |-------------------------------------------------------------------------- 
-        | Display Success Message
-        |-------------------------------------------------------------------------- 
-        | This section displays a confirmation message.
-        */
         $this->command->info('Features seeded successfully!');
     }
 }

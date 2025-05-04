@@ -14,7 +14,6 @@ class StatisticsSeeder extends Seeder
      */
     public function run()
     {
-        // Inserting predefined statistics data with icons
         Statistics::create([
             'icon' => 'bi bi-emoji-smile',
             'count' => 50,

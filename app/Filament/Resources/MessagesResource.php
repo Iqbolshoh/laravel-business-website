@@ -17,7 +17,9 @@ class MessagesResource extends Resource
 {
     protected static ?string $model = Message::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-envelope';
+    protected static ?string $navigationGroup = 'Aloqa';
+    protected static ?int $navigationSort = 18;
 
     public static function form(Form $form): Form
     {
@@ -73,7 +75,6 @@ class MessagesResource extends Resource
                 ]),
             ]);
     }
-
 
     public static function getRelations(): array
     {

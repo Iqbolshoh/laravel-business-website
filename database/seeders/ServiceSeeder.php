@@ -9,46 +9,45 @@ class ServiceSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
     public function run()
     {
-        Service::create([
-            'title' => 'Bizning xizmatlarimiz',
-            'description' => 'Xizmatlarimizda har bir mijoz uchun individual yechimlar mavjud.',
-            'icon' => 'bi bi-activity',
-        ]);
+        $services = [
+            [
+                'title' => 'Our Services',
+                'description' => 'We offer personalized solutions tailored for each customer.',
+                'icon' => 'bi bi-activity',
+            ],
+            [
+                'title' => 'Custom Solutions',
+                'description' => 'Our services provide unique solutions tailored to every client’s needs.',
+                'icon' => 'bi bi-broadcast',
+            ],
+            [
+                'title' => 'Innovative Approaches',
+                'description' => 'We solve your problems using innovative methods and strategies.',
+                'icon' => 'bi bi-easel',
+            ],
+            [
+                'title' => 'Fast and Efficient Services',
+                'description' => 'We offer fast and efficient services with a strong focus on quality.',
+                'icon' => 'bi bi-bounding-box-circles',
+            ],
+            [
+                'title' => 'Expert Consultation',
+                'description' => 'Our experts provide top-notch consultations to help you grow.',
+                'icon' => 'bi bi-calendar4-week',
+            ],
+            [
+                'title' => 'Customer Communication',
+                'description' => 'We maintain open and friendly communication with our clients. We always listen.',
+                'icon' => 'bi bi-chat-square-text',
+            ],
+        ];
 
-        Service::create([
-            'title' => 'O\'ziga xos yechimlar',
-            'description' => 'Bizning xizmatlarimiz har bir mijozning ehtiyojlariga mos keladigan o\'ziga xos yechimlar taqdim etadi.',
-            'icon' => 'bi bi-broadcast',
-        ]);
-
-        Service::create([
-            'title' => 'Innovatsion yondashuvlar',
-            'description' => 'Biz innovatsion yondashuvlar yordamida sizning muammolaringizni hal etamiz.',
-            'icon' => 'bi bi-easel',
-        ]);
-
-        Service::create([
-            'title' => 'Tez va samarali xizmatlar',
-            'description' => 'Xizmatlarimiz tez va samarali, shuningdek, sifatga yuqori e\'tibor qaratadi.',
-            'icon' => 'bi bi-bounding-box-circles',
-        ]);
-
-        Service::create([
-            'title' => 'Mutaxassis maslahatlari',
-            'description' => 'Bizning mutaxassislarimiz sizga eng yaxshi maslahatlar beradi.',
-            'icon' => 'bi bi-calendar4-week',
-        ]);
-
-        Service::create([
-            'title' => 'Mijozlar bilan muloqot',
-            'description' => 'Mijozlar bilan samimiy muloqot olib boramiz. Sizni doimo tinglaymiz.',
-            'icon' => 'bi bi-chat-square-text',
-        ]);
+        foreach ($services as $service) {
+            Service::create($service);
+        }
 
         $this->command->info('Services seeded successfully!');
     }
