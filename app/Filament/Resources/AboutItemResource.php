@@ -19,6 +19,11 @@ class AboutItemResource extends Resource
     protected static ?string $navigationGroup = 'About Us';
     protected static ?int $navigationSort = 10;
 
+    public static function canAccess(): bool
+    {
+        return auth()->user()?->can('about-item.view');
+    }
+
     public static function form(Form $form): Form
     {
         $disableFileUploadButton = [
@@ -33,11 +38,13 @@ class AboutItemResource extends Resource
             ->schema([
                 Forms\Components\Select::make('about_id')
                     ->relationship('about', 'title')
+                    ->disabled(fn() => !auth()->user()?->can('about-item.edit'))
                     ->required()
-                    ->label('Bo‘lim (About)'),
+                    ->label('About'),
 
                 Forms\Components\RichEditor::make('bullet_point')
-                    ->label('Matn')
+                    ->label('Text')
+                    ->disabled(fn() => !auth()->user()?->can('about-item.edit'))
                     ->extraAttributes($disableFileUploadButton)
                     ->required()
                     ->columnSpanFull(),
@@ -68,7 +75,7 @@ class AboutItemResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()->visible(fn() => auth()->user()?->can('about-item.edit')),
             ])
             ->bulkActions([
             ]);
