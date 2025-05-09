@@ -53,6 +53,8 @@ class RolePermissionSeeder extends Seeder
                 'about-item' => ['view', 'edit'],
                 'statistics' => ['view', 'edit'],
                 'service' => ['view', 'edit'],
+                'service-section' => ['view', 'edit'],
+                'our-service' => ['view', 'edit'],
             ],
 
             /*
@@ -72,6 +74,14 @@ class RolePermissionSeeder extends Seeder
                     'permissions' => [
                         'profile' => ['view', 'edit'],
                         'session' => ['view', 'delete'],
+                        'banner' => ['view'],
+                        'feature' => ['view'],
+                        'news' => ['view'],
+                        'about' => ['view'],
+                        'about-item' => ['view'],
+                        'statistics' => ['view'],
+                        'service' => ['view'],
+                        'service-section' => ['view'],
                     ],
                 ],
             ],

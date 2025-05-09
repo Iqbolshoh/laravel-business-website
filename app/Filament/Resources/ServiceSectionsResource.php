@@ -22,6 +22,11 @@ class ServiceSectionsResource extends Resource
     protected static ?string $navigationGroup = 'Our Services';
     protected static ?int $navigationSort = 13;
 
+    public static function canAccess(): bool
+    {
+        return auth()->user()?->can('service-section.view');
+    }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -29,28 +34,38 @@ class ServiceSectionsResource extends Resource
                 Forms\Components\TextInput::make('title')
                     ->label('Title')
                     ->required()
+                    ->disabled(fn() => !auth()->user()?->can('service-section.edit'))
                     ->maxLength(255),
 
                 Forms\Components\Textarea::make('text_1')
                     ->label('Text 1')
                     ->required()
+                    ->disabled(fn() => !auth()->user()?->can('service-section.edit'))
                     ->maxLength(1000),
 
-                FileUpload::make('image')
-                    ->label('Image')
+                Forms\Components\FileUpload::make('image')
                     ->image()
-                    ->disk('public')
-                    ->nullable()
-                    ->required(),
+                    ->required()
+                    ->directory('services-images')
+                    ->label('Image')
+                    ->imageEditor()
+                    ->imageEditorMode(2)
+                    ->openable()
+                    ->downloadable()
+                    ->previewable()
+                    ->acceptedFileTypes(['image/jpeg', 'image/png'])
+                    ->disabled(fn() => !auth()->user()?->can('service-section.edit')),
 
                 Forms\Components\TextInput::make('sub_title')
                     ->label('Sub Title')
                     ->required()
+                    ->disabled(fn() => !auth()->user()?->can('service-section.edit'))
                     ->maxLength(255),
 
                 Forms\Components\Textarea::make('text_2')
                     ->label('Text 2')
                     ->required()
+                    ->disabled(fn() => !auth()->user()?->can('service-section.edit'))
                     ->maxLength(1000),
             ]);
     }
@@ -59,20 +74,17 @@ class ServiceSectionsResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\ImageColumn::make('image')
+                    ->label('Image')
+                    ->circular(),
+
                 Tables\Columns\TextColumn::make('title')
                     ->label('Title')
-                    ->sortable()
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('sub_title')
                     ->label('Sub Title')
                     ->limit(50),
-
-                Tables\Columns\ImageColumn::make('image')
-                    ->label('Image')
-                    ->rounded()
-                    ->width(50)
-                    ->height(50),
 
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Created At')
@@ -82,7 +94,7 @@ class ServiceSectionsResource extends Resource
                 //
             ])
             ->actions([
-                EditAction::make(),
+                Tables\Actions\EditAction::make()->visible(fn() => auth()->user()?->can('service-section.edit')),
             ])
             ->bulkActions([
             ]);
