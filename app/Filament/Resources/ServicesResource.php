@@ -17,23 +17,25 @@ class ServicesResource extends Resource
     protected static ?string $navigationGroup = 'Our Services';
     protected static ?int $navigationSort = 12;
 
+    public static function canAccess(): bool
+    {
+        return auth()->user()?->can('service.view');
+    }
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('title')
                     ->label('Title')
+                    ->disabled(fn() => !auth()->user()?->can('service.edit'))
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextArea::make('description')
                     ->label('Description')
+                    ->disabled(fn() => !auth()->user()?->can('service.edit'))
                     ->required()
                     ->maxLength(1000),
-                Forms\Components\TextInput::make('icon')
-                    ->label('Icon')
-                    ->required()
-                    ->disabled()
-                    ->maxLength(255),
             ]);
     }
 
@@ -41,23 +43,14 @@ class ServicesResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('title')
-                    ->label('Title')
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('description')
-                    ->label('Description')
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('icon')
-                    ->label('Icon')
-                    ->sortable()
-                    ->searchable(),
+                Tables\Columns\TextColumn::make('title')->label('Title')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('description')->label('Description')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('updated_at')->label('Updated At')->sortable()->dateTime(),
             ])
             ->filters([
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()->visible(fn() => auth()->user()?->can('service.edit')),
             ])
             ->bulkActions([]);
     }

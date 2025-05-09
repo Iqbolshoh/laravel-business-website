@@ -52,6 +52,7 @@ class RolePermissionSeeder extends Seeder
                 'about' => ['view', 'edit'],
                 'about-item' => ['view', 'edit'],
                 'statistics' => ['view', 'edit'],
+                'service' => ['view', 'edit'],
             ],
 
             /*
