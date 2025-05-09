@@ -20,6 +20,11 @@ class NewsResource extends Resource
     protected static ?string $navigationGroup = 'Yangiliklar';
     protected static ?int $navigationSort = 8;
 
+    public static function canAccess(): bool
+    {
+        return auth()->user()?->can('news.view');
+    }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -27,18 +32,27 @@ class NewsResource extends Resource
                 Forms\Components\TextInput::make('title')
                     ->label('Title')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->disabled(fn() => !auth()->user()?->can('news.edit')),
 
-                Forms\Components\Textarea::make('description') // Added 'description'
+                Forms\Components\Textarea::make('description')
                     ->label('Description')
-                    ->required() // You can make it required or not based on your needs
-                    ->maxLength(1000),
+                    ->required()
+                    ->maxLength(1000)
+                    ->disabled(fn() => !auth()->user()?->can('news.edit')),
+
 
                 Forms\Components\FileUpload::make('image')
-                    ->label('Image')
                     ->image()
-                    ->disk('public')
-                    ->nullable(),
+                    ->required()
+                    ->label('Image')
+                    ->imageEditor()
+                    ->imageEditorMode(2)
+                    ->openable()
+                    ->downloadable()
+                    ->previewable()
+                    ->acceptedFileTypes(['image/jpeg', 'image/png'])
+                    ->disabled(fn() => !auth()->user()?->can('news.edit')),
             ]);
     }
 
@@ -46,39 +60,40 @@ class NewsResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('id')
+                    ->label('ID')
+                    ->sortable(),
+
+                Tables\Columns\ImageColumn::make('image')
+                    ->label('Image')
+                    ->circular()
+                    ->sortable(),
+
                 Tables\Columns\TextColumn::make('title')
                     ->label('Title')
                     ->sortable()
                     ->searchable(),
 
-                Tables\Columns\TextColumn::make('description') // Added 'description'
+                Tables\Columns\TextColumn::make('description')
                     ->label('Description')
+                    ->sortable()
                     ->limit(50),
-
-                Tables\Columns\ImageColumn::make('image')
-                    ->label('Image')
-                    ->rounded()
-                    ->width(50)
-                    ->height(50),
 
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Created At')
+                    ->sortable()
                     ->dateTime(),
             ])
             ->filters([
             ])
             ->actions([
-                EditAction::make(),
-            ])
-            ->bulkActions([
-                DeleteBulkAction::make(),
+                EditAction::make()->visible(fn() => auth()->user()?->can('news.edit')),
             ]);
     }
 
     public static function getRelations(): array
     {
-        return [
-        ];
+        return [];
     }
 
     public static function getPages(): array
