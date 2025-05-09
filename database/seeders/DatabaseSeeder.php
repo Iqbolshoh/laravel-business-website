@@ -11,14 +11,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        /*
-        |-------------------------------------------------------------------------- 
-        | Call UserSeeder
-        |-------------------------------------------------------------------------- 
-        | This section triggers the UserSeeder to create initial users in the system
-        | as per the predefined data (e.g. admin, default users).
-        */
-        $this->call(UserSeeder::class);
 
         /*
         |-------------------------------------------------------------------------- 
