@@ -15,7 +15,7 @@ class AboutResource extends Resource
 {
     protected static ?string $model = About::class;
     protected static ?string $navigationIcon = 'heroicon-o-information-circle';
-    protected static ?string $navigationGroup = 'Biz haqimizda';
+    protected static ?string $navigationGroup = 'About Us';
     protected static ?int $navigationSort = 9;
 
     public static function canAccess(): bool

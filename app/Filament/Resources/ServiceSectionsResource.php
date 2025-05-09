@@ -19,7 +19,7 @@ class ServiceSectionsResource extends Resource
     protected static ?string $model = ServiceSection::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-book-open';
-    protected static ?string $navigationGroup = 'Bizning xizmatlarimiz';
+    protected static ?string $navigationGroup = 'Our Services';
     protected static ?int $navigationSort = 13;
 
     public static function form(Form $form): Form

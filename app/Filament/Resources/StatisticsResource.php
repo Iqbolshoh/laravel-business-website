@@ -18,7 +18,7 @@ class StatisticsResource extends Resource
     protected static ?string $model = Statistics::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-chart-bar';
-    protected static ?string $navigationGroup = 'Biz haqimizda';
+    protected static ?string $navigationGroup = 'About Us';
     protected static ?int $navigationSort = 11;
 
     public static function form(Form $form): Form

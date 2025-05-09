@@ -15,7 +15,7 @@ class FeaturesResource extends Resource
     protected static ?string $model = Feature::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-cog';
-    protected static ?string $navigationGroup = 'Bosh sahifa';
+    protected static ?string $navigationGroup = 'Home';
     protected static ?int $navigationSort = 7;
 
     public static function canAccess(): bool
@@ -29,12 +29,12 @@ class FeaturesResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('title')
                     ->required()
-                    ->label('Sarlavha')
+                    ->label('Title')
                     ->disabled(fn() => !auth()->user()?->can('feature.edit')),
 
                 Forms\Components\Textarea::make('description')
                     ->required()
-                    ->label('Tavsif')
+                    ->label('Description')
                     ->disabled(fn() => !auth()->user()?->can('feature.edit')),
             ]);
     }
@@ -43,8 +43,8 @@ class FeaturesResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('title')->label('Sarlavha')->sortable(),
-                Tables\Columns\TextColumn::make('description')->label('Tavsif')->sortable()->limit(50),
+                Tables\Columns\TextColumn::make('title')->label('Title')->sortable(),
+                Tables\Columns\TextColumn::make('description')->label('Description')->sortable()->limit(50),
             ])
             ->actions([
                 Tables\Actions\EditAction::make()->visible(fn() => auth()->user()?->can('feature.edit')),

@@ -16,7 +16,7 @@ class BannerResource extends Resource
     protected static ?string $model = Banner::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-photo';
-    protected static ?string $navigationGroup = 'Bosh sahifa';
+    protected static ?string $navigationGroup = 'Home';
     protected static ?int $navigationSort = 6;
 
     public static function canAccess(): bool
