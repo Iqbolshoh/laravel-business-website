@@ -73,7 +73,7 @@ class AboutResource extends Resource
             ->columns([
                 Tables\Columns\ImageColumn::make('image')->label('Image')->circular(),
                 Tables\Columns\TextColumn::make('title')->label('Title'),
-                Tables\Columns\TextColumn::make('updated_at')->label('Updated At')->dateTime(),
+                Tables\Columns\TextColumn::make('updated_at')->label('Updated at')->dateTime(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make()->visible(fn() => auth()->user()?->can('about.edit')),

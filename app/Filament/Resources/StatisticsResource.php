@@ -58,7 +58,7 @@ class StatisticsResource extends Resource
                 Tables\Columns\TextColumn::make('title')->sortable()->searchable()->limit(50),
                 Tables\Columns\TextColumn::make('count')->sortable(),
                 Tables\Columns\TextColumn::make('description')->limit(100),
-                Tables\Columns\TextColumn::make('updated_at')->label('Updated At')->sortable()->dateTime(),
+                Tables\Columns\TextColumn::make('updated_at')->label('Updated at')->sortable()->dateTime(),
             ])
             ->filters([
             ])

@@ -55,6 +55,7 @@ class RolePermissionSeeder extends Seeder
                 'service' => ['view', 'edit'],
                 'service-section' => ['view', 'edit'],
                 'our-service' => ['view', 'edit'],
+                'category' => ['view', 'create', 'edit', 'delete'],
             ],
 
             /*
@@ -83,6 +84,7 @@ class RolePermissionSeeder extends Seeder
                         'service' => ['view'],
                         'service-section' => ['view'],
                         'our-service' => ['view'],
+                        'category' => ['view']
                     ],
                 ],
             ],

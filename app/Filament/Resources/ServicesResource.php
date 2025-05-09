@@ -46,7 +46,7 @@ class ServicesResource extends Resource
                 Tables\Columns\TextColumn::make('id')->label('ID')->sortable(),
                 Tables\Columns\TextColumn::make('title')->label('Title')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('description')->label('Description')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('updated_at')->label('Updated At')->sortable()->dateTime(),
+                Tables\Columns\TextColumn::make('updated_at')->label('Updated at')->sortable()->dateTime(),
             ])
             ->filters([
             ])

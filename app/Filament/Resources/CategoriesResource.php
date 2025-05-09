@@ -23,32 +23,37 @@ class CategoriesResource extends Resource
     protected static ?string $navigationGroup = 'Products';
     protected static ?int $navigationSort = 15;
 
+    public static function canAccess(): bool
+    {
+        return auth()->user()?->can('category.view');
+    }
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 TextInput::make('name')
-                    ->label('Kategoriya nomi')
+                    ->label('Category name')
                     ->required()
                     ->maxLength(255),
             ]);
     }
-    
+
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
                 TextColumn::make('id')->label('ID')->sortable(),
-                TextColumn::make('name')->label('Kategoriya nomi')->searchable(),
+                TextColumn::make('name')->label('Category name')->searchable(),
+                TextColumn::make('products_count')->label('Products count')->counts('products')->sortable(),
                 TextColumn::make('created_at')->dateTime('d.m.Y H:i'),
             ])
             ->filters([
-                //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-            ])
-            ->bulkActions([]);
+                Tables\Actions\EditAction::make()->visible(fn() => auth()->user()?->can('category.edit')),
+                Tables\Actions\DeleteAction::make()->visible(fn() => auth()->user()?->can('category.delete')),
+            ]);
     }
 
     public static function getRelations(): array

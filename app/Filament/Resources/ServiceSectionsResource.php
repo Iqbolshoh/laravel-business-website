@@ -74,21 +74,10 @@ class ServiceSectionsResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('image')
-                    ->label('Image')
-                    ->circular(),
-
-                Tables\Columns\TextColumn::make('title')
-                    ->label('Title')
-                    ->searchable(),
-
-                Tables\Columns\TextColumn::make('sub_title')
-                    ->label('Sub Title')
-                    ->limit(50),
-
-                Tables\Columns\TextColumn::make('created_at')
-                    ->label('Created At')
-                    ->dateTime(),
+                Tables\Columns\ImageColumn::make('image')->label('Image')->circular(),
+                Tables\Columns\TextColumn::make('title')->label('Title')->searchable(),
+                Tables\Columns\TextColumn::make('sub_title')->label('Sub Title')->limit(50),
+                Tables\Columns\TextColumn::make('created_at')->label('Created at')->dateTime(),
             ])
             ->filters([
                 //
