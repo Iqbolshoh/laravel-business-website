@@ -18,6 +18,11 @@ class AboutResource extends Resource
     protected static ?string $navigationGroup = 'Biz haqimizda';
     protected static ?int $navigationSort = 9;
 
+    public static function canAccess(): bool
+    {
+        return auth()->user()?->can('about.view');
+    }
+
     public static function form(Form $form): Form
     {
         $disableFileUploadButton = [
@@ -32,22 +37,33 @@ class AboutResource extends Resource
         return $form->schema([
             Forms\Components\TextInput::make('title')
                 ->required()
+                ->disabled(fn() => !auth()->user()?->can('about.edit'))
                 ->label('Sarlavha'),
 
             RichEditor::make('text_1')
                 ->required()
+                ->disabled(fn() => !auth()->user()?->can('about.edit'))
                 ->label('Matn 1')
                 ->extraAttributes($disableFileUploadButton),
 
             RichEditor::make('text_2')
                 ->required()
+                ->disabled(fn() => !auth()->user()?->can('about.edit'))
                 ->label('Matn 2')
                 ->extraAttributes($disableFileUploadButton),
 
             Forms\Components\FileUpload::make('image')
                 ->image()
+                ->required()
                 ->directory('about-images')
-                ->label('Rasm'),
+                ->label('Image')
+                ->imageEditor()
+                ->imageEditorMode(2)
+                ->openable()
+                ->downloadable()
+                ->previewable()
+                ->acceptedFileTypes(['image/jpeg', 'image/png'])
+                ->disabled(fn() => !auth()->user()?->can('banner.edit')),
         ]);
     }
 
@@ -55,13 +71,13 @@ class AboutResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\ImageColumn::make('image')->label('Image')->circular(),
                 Tables\Columns\TextColumn::make('title')->label('Sarlavha'),
                 Tables\Columns\TextColumn::make('text_1')->label('Matn 1')->limit(50),
                 Tables\Columns\TextColumn::make('text_2')->label('Matn 2')->limit(50),
-                Tables\Columns\ImageColumn::make('image')->label('Rasm'),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()->visible(fn() => auth()->user()?->can('about.edit')),
             ])
             ->bulkActions([
             ])

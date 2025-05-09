@@ -49,6 +49,7 @@ class RolePermissionSeeder extends Seeder
                 'banner' => ['view', 'create', 'edit', 'delete'],
                 'feature' => ['view', 'edit'],
                 'news' => ['view', 'create', 'edit', 'delete'],
+                'about' => ['view', 'edit'],
             ],
 
             /*
