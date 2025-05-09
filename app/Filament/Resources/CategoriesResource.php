@@ -43,10 +43,10 @@ class CategoriesResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('id')->label('ID')->sortable(),
-                TextColumn::make('name')->label('Category name')->searchable(),
+                TextColumn::make('id')->label('ID')->searchable()->sortable(),
+                TextColumn::make('name')->label('Category name')->searchable()->badge()->sortable(),
                 TextColumn::make('products_count')->label('Products count')->counts('products')->sortable(),
-                TextColumn::make('created_at')->dateTime('d.m.Y H:i'),
+                TextColumn::make('created_at')->dateTime('d.m.Y H:i')->sortable(),
             ])
             ->filters([
             ])

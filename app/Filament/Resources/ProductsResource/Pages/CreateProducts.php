@@ -9,4 +9,9 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateProducts extends CreateRecord
 {
     protected static string $resource = ProductsResource::class;
+
+    public static function canAccess(array $parameters = []): bool
+    {
+        return auth()->user()?->can('category.create');
+    }
 }

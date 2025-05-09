@@ -56,6 +56,7 @@ class RolePermissionSeeder extends Seeder
                 'service-section' => ['view', 'edit'],
                 'our-service' => ['view', 'edit'],
                 'category' => ['view', 'create', 'edit', 'delete'],
+                'product' => ['view', 'create', 'edit', 'delete'],
             ],
 
             /*
