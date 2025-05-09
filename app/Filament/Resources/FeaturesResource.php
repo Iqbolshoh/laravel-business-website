@@ -43,6 +43,7 @@ class FeaturesResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('id')->label('ID')->sortable(),
                 Tables\Columns\TextColumn::make('title')->label('Title')->sortable(),
                 Tables\Columns\TextColumn::make('description')->label('Description')->sortable()->limit(50),
                 Tables\Columns\TextColumn::make('updated_at')->label('Updated At')->sortable()->dateTime(),

@@ -43,6 +43,7 @@ class ServicesResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('id')->label('ID')->sortable(),
                 Tables\Columns\TextColumn::make('title')->label('Title')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('description')->label('Description')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('updated_at')->label('Updated At')->sortable()->dateTime(),

@@ -55,6 +55,7 @@ class AboutItemResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('id')->label('ID')->sortable(),
                 Tables\Columns\TextColumn::make('about.title')->label('About')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('bullet_point')->label('Text')->sortable()->limit(50)->wrap(),
                 Tables\Columns\TextColumn::make('updated_at')->label('Updated At')->sortable()->dateTime(),

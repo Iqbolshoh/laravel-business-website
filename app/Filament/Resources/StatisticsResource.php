@@ -54,6 +54,7 @@ class StatisticsResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('id')->label('ID')->sortable(),
                 Tables\Columns\TextColumn::make('title')->sortable()->searchable()->limit(50),
                 Tables\Columns\TextColumn::make('count')->sortable(),
                 Tables\Columns\TextColumn::make('description')->limit(100),
