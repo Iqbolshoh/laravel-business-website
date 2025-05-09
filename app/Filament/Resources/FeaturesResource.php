@@ -18,22 +18,24 @@ class FeaturesResource extends Resource
     protected static ?string $navigationGroup = 'Bosh sahifa';
     protected static ?int $navigationSort = 7;
 
+    public static function canAccess(): bool
+    {
+        return auth()->user()?->can('feature.view');
+    }
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('icon_class')
-                    ->required()
-                    ->label('Ikonka class')
-                    ->disabled(),
-
                 Forms\Components\TextInput::make('title')
                     ->required()
-                    ->label('Sarlavha'),
+                    ->label('Sarlavha')
+                    ->disabled(fn() => !auth()->user()?->can('feature.edit')),
 
                 Forms\Components\Textarea::make('description')
                     ->required()
-                    ->label('Tavsif'),
+                    ->label('Tavsif')
+                    ->disabled(fn() => !auth()->user()?->can('feature.edit')),
             ]);
     }
 
@@ -41,12 +43,11 @@ class FeaturesResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('icon_class')->label('Ikonka')->sortable(),
                 Tables\Columns\TextColumn::make('title')->label('Sarlavha')->sortable(),
                 Tables\Columns\TextColumn::make('description')->label('Tavsif')->sortable()->limit(50),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()->visible(fn() => auth()->user()?->can('feature.edit')),
             ])
             ->headerActions([]);
     }
