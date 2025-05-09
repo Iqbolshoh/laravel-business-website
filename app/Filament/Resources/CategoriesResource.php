@@ -35,6 +35,7 @@ class CategoriesResource extends Resource
                 TextInput::make('name')
                     ->label('Category name')
                     ->required()
+                    ->disabled(fn() => !auth()->user()?->can('category.edit'))
                     ->maxLength(255),
             ]);
     }

@@ -18,27 +18,28 @@ class SocialLinksResource extends Resource
     protected static ?string $navigationGroup = 'Contact';
     protected static ?int $navigationSort = 17;
 
+    public static function canAccess(): bool
+    {
+        return auth()->user()?->can('social-link.view');
+    }
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('title')
-                    ->label('Sarlavha')
                     ->required()
-                    ->maxLength(255),
-
-                Forms\Components\TextInput::make('icon')
-                    ->label('Ikonka (class nomi)')
-                    ->required()
+                    ->disabled(fn() => !auth()->user()?->can('social-link.edit'))
                     ->maxLength(255),
 
                 Forms\Components\TextInput::make('value')
-                    ->label('Link manzili')
+                    ->label('Link')
                     ->url()
+                    ->disabled(fn() => !auth()->user()?->can('social-link.edit'))
                     ->maxLength(255),
 
                 Forms\Components\Toggle::make('is_active')
-                    ->label('Faol holatda')
+                    ->disabled(fn() => !auth()->user()?->can('social-link.edit'))
                     ->default(true),
             ]);
     }
@@ -46,30 +47,16 @@ class SocialLinksResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('title')
-                    ->label('Sarlavha')
-                    ->searchable()
-                    ->sortable(),
-
-                Tables\Columns\TextColumn::make('icon')
-                    ->label('Ikonka'),
-
-                Tables\Columns\TextColumn::make('value')
-                    ->label('Link')
-                    ->openUrlInNewTab(),
-
-                Tables\Columns\IconColumn::make('is_active')
-                    ->label('Faolmi?')
-                    ->boolean()
-                    ->trueIcon('heroicon-o-check-circle')
-                    ->falseIcon('heroicon-o-x-circle')
-                    ->sortable(),
+                Tables\Columns\TextColumn::make('id')->label('ID')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('title')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('value')->label('Link')->openUrlInNewTab(),
+                Tables\Columns\IconColumn::make('is_active')->boolean()->trueIcon('heroicon-o-check-circle')->falseIcon('heroicon-o-x-circle')->sortable(),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()->visible(fn() => auth()->user()?->can('social-link.edit')),
             ]);
     }
 

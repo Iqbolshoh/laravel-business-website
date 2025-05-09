@@ -35,17 +35,21 @@ class ProductsResource extends Resource
                 ->label('Category')
                 ->options(Category::pluck('name', 'id'))
                 ->searchable()
+                ->disabled(fn() => !auth()->user()?->can('product.edit'))
                 ->required(),
 
             TextInput::make('product_name')
                 ->required()
+                ->disabled(fn() => !auth()->user()?->can('product.edit'))
                 ->maxLength(255),
 
             Textarea::make('description')
+                ->disabled(fn() => !auth()->user()?->can('product.edit'))
                 ->required(),
 
             TextInput::make('price')
                 ->numeric()
+                ->disabled(fn() => !auth()->user()?->can('product.edit'))
                 ->required(),
 
             // 
