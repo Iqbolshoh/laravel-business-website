@@ -21,29 +21,31 @@ class StatisticsResource extends Resource
     protected static ?string $navigationGroup = 'About Us';
     protected static ?int $navigationSort = 11;
 
+    public static function canAccess(): bool
+    {
+        return auth()->user()?->can('statistics.view');
+    }
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('title')
                     ->required()
+                    ->disabled(fn() => !auth()->user()?->can('statistics.edit'))
                     ->maxLength(255),
-
-                Forms\Components\TextInput::make('icon')
-                    ->required()
-                    ->maxLength(255)
-                    ->disabled()
-                    ->helperText('Enter the icon name or class (e.g., "heroicon-o-chart-bar")'),
 
                 Forms\Components\TextInput::make('count')
                     ->required()
                     ->numeric()
                     ->minValue(0)
+                    ->disabled(fn() => !auth()->user()?->can('statistics.edit'))
                     ->helperText('Enter the numeric count value'),
 
                 Forms\Components\Textarea::make('description')
                     ->required()
                     ->maxLength(500)
+                    ->disabled(fn() => !auth()->user()?->can('statistics.edit'))
                     ->helperText('A brief description of the statistic'),
             ]);
     }
@@ -52,29 +54,15 @@ class StatisticsResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('title')
-                    ->sortable()
-                    ->searchable()
-                    ->limit(50),
-
-                Tables\Columns\TextColumn::make('icon')
-                    ->sortable()
-                    ->limit(50),
-
-                Tables\Columns\TextColumn::make('count')
-                    ->sortable(),
-
-                Tables\Columns\TextColumn::make('description')
-                    ->limit(100),
-
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime('Y-m-d H:i')
-                    ->sortable(),
+                Tables\Columns\TextColumn::make('title')->sortable()->searchable()->limit(50),
+                Tables\Columns\TextColumn::make('count')->sortable(),
+                Tables\Columns\TextColumn::make('description')->limit(100),
+                Tables\Columns\TextColumn::make('updated_at')->label('Updated At')->sortable()->dateTime(),
             ])
             ->filters([
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()->visible(fn() => auth()->user()?->can('statistics.edit')),
             ])
             ->bulkActions([
             ]);

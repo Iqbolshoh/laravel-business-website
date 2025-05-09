@@ -38,18 +38,18 @@ class AboutResource extends Resource
             Forms\Components\TextInput::make('title')
                 ->required()
                 ->disabled(fn() => !auth()->user()?->can('about.edit'))
-                ->label('Sarlavha'),
+                ->label('Title'),
 
             RichEditor::make('text_1')
                 ->required()
                 ->disabled(fn() => !auth()->user()?->can('about.edit'))
-                ->label('Matn 1')
+                ->label('Text 1')
                 ->extraAttributes($disableFileUploadButton),
 
             RichEditor::make('text_2')
                 ->required()
                 ->disabled(fn() => !auth()->user()?->can('about.edit'))
-                ->label('Matn 2')
+                ->label('Text 2')
                 ->extraAttributes($disableFileUploadButton),
 
             Forms\Components\FileUpload::make('image')
@@ -72,9 +72,8 @@ class AboutResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\ImageColumn::make('image')->label('Image')->circular(),
-                Tables\Columns\TextColumn::make('title')->label('Sarlavha'),
-                Tables\Columns\TextColumn::make('text_1')->label('Matn 1')->limit(50),
-                Tables\Columns\TextColumn::make('text_2')->label('Matn 2')->limit(50),
+                Tables\Columns\TextColumn::make('title')->label('Title'),
+                Tables\Columns\TextColumn::make('updated_at')->label('Updated At')->dateTime(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make()->visible(fn() => auth()->user()?->can('about.edit')),

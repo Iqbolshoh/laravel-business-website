@@ -55,21 +55,9 @@ class AboutItemResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('about.title')
-                    ->label('Bo‘lim nomi')
-                    ->sortable()
-                    ->searchable(),
-
-                Tables\Columns\TextColumn::make('bullet_point')
-                    ->label('Matn')
-                    ->sortable()
-                    ->limit(50)
-                    ->wrap(),
-
-                Tables\Columns\TextColumn::make('created_at')
-                    ->label('Yaratilgan sana')
-                    ->sortable()
-                    ->dateTime(),
+                Tables\Columns\TextColumn::make('about.title')->label('About')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('bullet_point')->label('Text')->sortable()->limit(50)->wrap(),
+                Tables\Columns\TextColumn::make('updated_at')->label('Updated At')->sortable()->dateTime(),
             ])
             ->filters([
                 //

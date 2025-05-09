@@ -51,6 +51,7 @@ class BannerResource extends Resource
                 Forms\Components\FileUpload::make('image')
                     ->image()
                     ->required()
+                    ->directory('banner-images')
                     ->label('Image')
                     ->imageEditor()
                     ->imageEditorMode(2)
@@ -85,10 +86,10 @@ class BannerResource extends Resource
                     ->default('-')
                     ->sortable(),
 
-                Tables\Columns\TextColumn::make('button_link')
-                    ->label('Button Link')
-                    ->default('-')
-                    ->sortable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('Created At')
+                    ->sortable()
+                    ->dateTime(),
             ])
 
             ->filters([

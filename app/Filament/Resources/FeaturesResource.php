@@ -45,6 +45,7 @@ class FeaturesResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('title')->label('Title')->sortable(),
                 Tables\Columns\TextColumn::make('description')->label('Description')->sortable()->limit(50),
+                Tables\Columns\TextColumn::make('updated_at')->label('Updated At')->sortable()->dateTime(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make()->visible(fn() => auth()->user()?->can('feature.edit')),

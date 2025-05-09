@@ -45,6 +45,7 @@ class NewsResource extends Resource
                 Forms\Components\FileUpload::make('image')
                     ->image()
                     ->required()
+                    ->directory('news-images')
                     ->label('Image')
                     ->imageEditor()
                     ->imageEditorMode(2)
