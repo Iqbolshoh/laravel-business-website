@@ -46,6 +46,7 @@ class RolePermissionSeeder extends Seeder
             'permissions' => [
                 'profile' => ['view', 'edit'],
                 'session' => ['view', 'delete'],
+                'banner' => ['view', 'create', 'edit', 'delete'],
             ],
 
             /*

@@ -19,25 +19,34 @@ class BannerResource extends Resource
     protected static ?string $navigationGroup = 'Bosh sahifa';
     protected static ?int $navigationSort = 6;
 
+    public static function canAccess(): bool
+    {
+        return auth()->user()?->can('banner.view');
+    }
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('title')
                     ->required()
-                    ->label('Title'),
+                    ->label('Title')
+                    ->disabled(fn() => !auth()->user()?->can('banner.edit')),
 
                 Forms\Components\TextInput::make('button_text')
                     ->nullable()
-                    ->label('Button Text'),
+                    ->label('Button Text')
+                    ->disabled(fn() => !auth()->user()?->can('banner.edit')),
 
                 Forms\Components\TextInput::make('button_link')
                     ->nullable()
-                    ->label('Button Link'),
+                    ->label('Button Link')
+                    ->disabled(fn() => !auth()->user()?->can('banner.edit')),
 
                 Forms\Components\Textarea::make('description')
                     ->required()
-                    ->label('Description'),
+                    ->label('Description')
+                    ->disabled(fn() => !auth()->user()?->can('banner.edit')),
 
                 Forms\Components\FileUpload::make('image')
                     ->image()
@@ -49,6 +58,7 @@ class BannerResource extends Resource
                     ->downloadable()
                     ->previewable()
                     ->acceptedFileTypes(['image/jpeg', 'image/png'])
+                    ->disabled(fn() => !auth()->user()?->can('banner.edit')),
             ]);
     }
 
@@ -84,20 +94,14 @@ class BannerResource extends Resource
             ->filters([
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make()
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                Tables\Actions\EditAction::make()->visible(fn() => auth()->user()?->can('banner.edit')),
+                Tables\Actions\DeleteAction::make()->visible(fn() => auth()->user()?->can('banner.delete')),
             ]);
     }
 
     public static function getRelations(): array
     {
-        return [
-        ];
+        return [];
     }
 
     public static function getPages(): array
