@@ -21,17 +21,23 @@ class OurServicesResource extends Resource
     protected static ?string $navigationGroup = 'Our Services';
     protected static ?int $navigationSort = 14;
 
+    public static function canAccess(): bool
+    {
+        return auth()->user()?->can('our-service.view');
+    }
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('service_name')
                     ->required()
+                    ->disabled(fn() => !auth()->user()?->can('our-service.edit'))
                     ->maxLength(255)
-                    ->label('Xizmat nomi'),
+                    ->label('Service name'),
 
                 Forms\Components\Select::make('skill_level')
-                    ->label('Ko‘nikma darajasi (%)')
+                    ->label('Skill level (%)')
+                    ->disabled(fn() => !auth()->user()?->can('our-service.edit'))
                     ->required()
                     ->options(collect(range(0, 100, 1))->mapWithKeys(fn($v) => [$v => $v . '%'])->toArray())
             ]);
@@ -42,18 +48,13 @@ class OurServicesResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('service_name')
-                    ->label('Xizmat nomi')
-                    ->searchable()
-                    ->sortable(),
-
-                Tables\Columns\TextColumn::make('skill_level')
-                    ->label('Ko‘nikma (%)')
-                    ->sortable(),
+                Tables\Columns\TextColumn::make('service_name')->label('Service name')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('skill_level')->label('Skill level (%)')->sortable(),
+                Tables\Columns\TextColumn::make('updated_at')->label('Updated At')->sortable()->dateTime(),
             ])
             ->filters([])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()->visible(fn() => auth()->user()?->can('our-service.edit')),
             ])
             ->bulkActions([]);
     }

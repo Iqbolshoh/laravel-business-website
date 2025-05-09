@@ -82,6 +82,7 @@ class RolePermissionSeeder extends Seeder
                         'statistics' => ['view'],
                         'service' => ['view'],
                         'service-section' => ['view'],
+                        'our-service' => ['view'],
                     ],
                 ],
             ],
