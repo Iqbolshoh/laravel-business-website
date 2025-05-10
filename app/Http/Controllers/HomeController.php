@@ -12,6 +12,7 @@ use App\Models\Feature;
 use App\Models\About;
 use App\Models\AboutItem;
 use App\Models\Service;
+use App\Models\SocialLink;
 
 class HomeController extends Controller
 {
@@ -22,22 +23,23 @@ class HomeController extends Controller
         $aboutData = About::all();
         $serviceItems = AboutItem::all();
         $services = Service::all();
+        $socialLinks = SocialLink::all();
 
         $aboutItems = [];
         foreach ($aboutData as $about) {
             $aboutItems[$about->id] = [
                 'title' => $about->title,
-                'p1' => $about->p1,
-                'p2' => $about->p2,
+                'text_1' => $about->text_1,
+                'text_2' => $about->text_2,
                 'image' => $about->image,
                 'list_items' => []
             ];
         }
 
         foreach ($serviceItems as $item) {
-            $aboutItems[$item->about_id]['list_items'][] = $item->list_item;
+            $aboutItems[$item->about_id]['list_items'][] = $item->bullet_point;
         }
 
-        return view('home', compact('banners', 'features', 'aboutItems', 'services'));
+        return view('home', compact('banners', 'features', 'aboutItems', 'services', 'socialLinks'));
     }
 }

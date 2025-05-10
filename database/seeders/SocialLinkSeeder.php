@@ -13,16 +13,18 @@ class SocialLinkSeeder extends Seeder
     public function run(): void
     {
         $socialLinks = [
-            ['title' => 'Email', 'icon' => 'fas fa-envelope', 'link' => 'mailto:', 'value' => 'iilhomjonov777@gmail.com', 'is_active' => true],
-            ['title' => 'Phone', 'icon' => 'fas fa-phone', 'link' => 'tel:', 'value' => '+998997799333', 'is_active' => true],
-            ['title' => 'Telegram', 'icon' => 'fab fa-telegram', 'link' => 'https://t.me/', 'value' => 'iqbolshoh_777', 'is_active' => true],
-            ['title' => 'Facebook', 'icon' => 'fab fa-facebook', 'link' => 'https://facebook.com/', 'value' => null, 'is_active' => false],
-            ['title' => 'Instagram', 'icon' => 'fab fa-instagram', 'link' => 'https://instagram.com/', 'value' => 'iqbolshoh_777', 'is_active' => true],
-            ['title' => 'WhatsApp', 'icon' => 'fab fa-whatsapp', 'link' => 'https://wa.me/', 'value' => null, 'is_active' => false],
-            ['title' => 'X (Twitter)', 'icon' => 'fab fa-x-twitter', 'link' => 'https://twitter.com/', 'value' => null, 'is_active' => false],
-            ['title' => 'LinkedIn', 'icon' => 'fab fa-linkedin', 'link' => 'https://linkedin.com/in/', 'value' => null, 'is_active' => false],
-            ['title' => 'TikTok', 'icon' => 'fab fa-tiktok', 'link' => 'https://tiktok.com/', 'value' => null, 'is_active' => false],
-            ['title' => 'YouTube', 'icon' => 'fab fa-youtube', 'link' => 'https://youtube.com/', 'value' => null, 'is_active' => false],
+            ['title' => 'Description', 'icon' => '', 'link' => '', 'value' => null, 'is_active' => true],
+            ['title' => 'Address', 'icon' => '', 'link' => '', 'value' => null, 'is_active' => true],
+            ['title' => 'Email', 'icon' => 'bi bi-envelope', 'link' => 'mailto:', 'value' => 'iilhomjonov777@gmail.com', 'is_active' => true],
+            ['title' => 'Phone', 'icon' => 'bi bi-telephone', 'link' => 'tel:', 'value' => '+998997799333', 'is_active' => true],
+            ['title' => 'Telegram', 'icon' => 'bi bi-telegram', 'link' => 'https://t.me/', 'value' => 'iqbolshoh_777', 'is_active' => true],
+            ['title' => 'Facebook', 'icon' => 'bi bi-facebook', 'link' => 'https://facebook.com/', 'value' => null, 'is_active' => false],
+            ['title' => 'Instagram', 'icon' => 'bi bi-instagram', 'link' => 'https://instagram.com/', 'value' => 'iqbolshoh_777', 'is_active' => true],
+            ['title' => 'WhatsApp', 'icon' => 'bi bi-whatsapp', 'link' => 'https://wa.me/', 'value' => null, 'is_active' => false],
+            ['title' => 'X (Twitter)', 'icon' => 'bi bi-twitter-x', 'link' => 'https://twitter.com/', 'value' => null, 'is_active' => false],
+            ['title' => 'LinkedIn', 'icon' => 'bi bi-linkedin', 'link' => 'https://linkedin.com/in/', 'value' => null, 'is_active' => false],
+            ['title' => 'TikTok', 'icon' => 'bi bi-tiktok', 'link' => 'https://tiktok.com/', 'value' => null, 'is_active' => false],
+            ['title' => 'YouTube', 'icon' => 'bi bi-youtube', 'link' => 'https://youtube.com/', 'value' => null, 'is_active' => false],
         ];
 
         foreach ($socialLinks as $link) {

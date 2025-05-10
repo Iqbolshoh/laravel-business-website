@@ -32,7 +32,6 @@ class SocialLinksResource extends Resource
                     ->maxLength(255),
 
                 Forms\Components\TextInput::make('value')
-                    ->url()
                     ->disabled(fn() => !auth()->user()?->can('social-link.edit'))
                     ->maxLength(255),
 
