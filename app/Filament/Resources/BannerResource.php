@@ -6,6 +6,7 @@ use App\Filament\Resources\BannerResource\Pages;
 use App\Filament\Resources\BannerResource\RelationManagers;
 use App\Models\Banner;
 use Filament\Forms;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -26,6 +27,15 @@ class BannerResource extends Resource
 
     public static function form(Form $form): Form
     {
+        $disableFileUploadButton = [
+            'x-init' => <<<JS
+                setTimeout(() => {
+                    document.querySelectorAll('trix-toolbar [data-trix-action="attachFiles"]')
+                        .forEach(btn => btn.remove());
+                }, 500);
+            JS,
+        ];
+
         return $form
             ->schema([
                 Forms\Components\TextInput::make('title')
@@ -43,11 +53,6 @@ class BannerResource extends Resource
                     ->label('Button Link')
                     ->disabled(fn() => !auth()->user()?->can('banner.edit')),
 
-                Forms\Components\Textarea::make('description')
-                    ->required()
-                    ->label('Description')
-                    ->disabled(fn() => !auth()->user()?->can('banner.edit')),
-
                 Forms\Components\FileUpload::make('image')
                     ->image()
                     ->required()
@@ -60,6 +65,15 @@ class BannerResource extends Resource
                     ->previewable()
                     ->acceptedFileTypes(['image/jpeg', 'image/png'])
                     ->disabled(fn() => !auth()->user()?->can('banner.edit')),
+
+                RichEditor::make('description')
+                    ->required()
+                    ->disabled(fn() => !auth()->user()?->can('about.edit'))
+                    ->label('Description')
+                    ->extraAttributes($disableFileUploadButton)
+                    ->required()
+                    ->disabled(fn() => !auth()->user()?->can('banner.edit'))
+                    ->columnSpanFull(),
             ]);
     }
 

@@ -40,6 +40,19 @@ class AboutResource extends Resource
                 ->disabled(fn() => !auth()->user()?->can('about.edit'))
                 ->label('Title'),
 
+            Forms\Components\FileUpload::make('image')
+                ->image()
+                ->required()
+                ->directory('about-images')
+                ->label('Image')
+                ->imageEditor()
+                ->imageEditorMode(2)
+                ->openable()
+                ->downloadable()
+                ->previewable()
+                ->acceptedFileTypes(['image/jpeg', 'image/png'])
+                ->disabled(fn() => !auth()->user()?->can('banner.edit')),
+
             RichEditor::make('text_1')
                 ->required()
                 ->disabled(fn() => !auth()->user()?->can('about.edit'))
@@ -55,19 +68,6 @@ class AboutResource extends Resource
                 ->extraAttributes($disableFileUploadButton)
                 ->required()
                 ->columnSpanFull(),
-
-            Forms\Components\FileUpload::make('image')
-                ->image()
-                ->required()
-                ->directory('about-images')
-                ->label('Image')
-                ->imageEditor()
-                ->imageEditorMode(2)
-                ->openable()
-                ->downloadable()
-                ->previewable()
-                ->acceptedFileTypes(['image/jpeg', 'image/png'])
-                ->disabled(fn() => !auth()->user()?->can('banner.edit')),
         ]);
     }
 
