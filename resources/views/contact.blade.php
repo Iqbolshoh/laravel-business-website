@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Services</title>
+    <title>Contact</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
 
@@ -91,6 +91,18 @@
 
                     <!-- Contact Form -->
                     <div class="col-lg-6">
+                        @if(session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+
+                        @if(session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        @endif
+
                         <form action="{{ route('send_message') }}" method="POST" class="php-email-form" id="contactForm"
                             data-aos="fade-up">
                             @csrf
@@ -113,9 +125,6 @@
                                 </div>
                                 <div class="col-md-12 text-center">
                                     <button type="submit">Send Message</button>
-                                    <div class="sent-message" style="display: none;">Your message has been sent
-                                        successfully!</div>
-                                    <div class="error-message" style="display: none;"></div>
                                 </div>
                             </div>
                         </form>
