@@ -70,6 +70,11 @@
                                             <div class="meta-top">
                                                 <ul>
                                                     <li class="d-flex align-items-center">
+                                                        <a href="{{ route('news.show', $new->id) }}">
+                                                            <i class="bi bi-eye"></i> {{ $new->views }} Views
+                                                        </a>
+                                                    </li>
+                                                    <li class="d-flex align-items-center">
                                                         <i class="bi bi-clock"></i>
                                                         <a href="{{ route('news.show', $new->id) }}">
                                                             <time datetime="{{ $new->created_at->format('Y-m-d') }}">
@@ -113,8 +118,9 @@
                         <!-- Search Widget -->
                         <div class="search-widget widget-item">
                             <h3 class="widget-title">Search</h3>
-                            <form action="">
-                                <input type="text">
+                            <form action="{{ route('news.index') }}" method="GET">
+                                <input type="text" name="search" value="{{ request()->query('search') }}"
+                                    placeholder="Search news...">
                                 <button type="submit"><i class="bi bi-search"></i></button>
                             </form>
                         </div><!--/Search Widget -->
@@ -133,20 +139,6 @@
                                 </div>
                             @endforeach
                         </div><!--/Recent Posts Widget -->
-
-                        <!-- Tags Widget -->
-                        <div class="tags-widget widget-item">
-                            <h3 class="widget-title">Tags</h3>
-                            <ul>
-                                <li><a href="#">App</a></li>
-                                <li><a href="#">IT</a></li>
-                                <li><a href="#">Business</a></li>
-                                <li><a href="#">Design</a></li>
-                                <li><a href="#">Creative</a></li>
-                                <li><a href="#">Tips</a></li>
-                                <li><a href="#">Marketing</a></li>
-                            </ul>
-                        </div><!--/Tags Widget -->
 
                     </div>
                 </div>

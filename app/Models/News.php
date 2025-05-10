@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Storage;
 
 class News extends Model
 {
-    protected $fillable = ['title', 'description', 'image'];
+    protected $fillable = ['title', 'description', 'image', 'views'];
 
     protected static function boot()
     {
@@ -27,5 +27,10 @@ class News extends Model
                 }
             }
         });
+    }
+
+    public function incrementView()
+    {
+        $this->increment('views');
     }
 }

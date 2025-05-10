@@ -8,9 +8,19 @@ use Illuminate\Http\Request;
 
 class NewsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $news = News::latest()->paginate(5);
+        $search = $request->input('search');
+
+        if ($search) {
+            $news = News::where('title', 'like', "%{$search}%")
+                ->orWhere('description', 'like', "%{$search}%")
+                ->latest()
+                ->paginate(5);
+        } else {
+            $news = News::latest()->paginate(5);
+        }
+
         $recentNews = News::latest()->take(5)->get();
         $socialLinks = SocialLink::all();
 
