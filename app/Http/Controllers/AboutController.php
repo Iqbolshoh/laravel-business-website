@@ -2,22 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Banner;
-use App\Models\Feature;
 use App\Models\About;
 use App\Models\AboutItem;
-use App\Models\Service;
 use App\Models\SocialLink;
 
-class HomeController extends Controller
+class AboutController extends Controller
 {
     public function index()
     {
-        $banners = Banner::all();
-        $features = Feature::all();
         $aboutData = About::all();
         $serviceItems = AboutItem::all();
-        $services = Service::all();
         $socialLinks = SocialLink::all();
 
         $aboutItems = [];
@@ -35,6 +29,6 @@ class HomeController extends Controller
             $aboutItems[$item->about_id]['list_items'][] = $item->bullet_point;
         }
 
-        return view('home', compact('banners', 'features', 'aboutItems', 'services', 'socialLinks'));
+        return view('about', compact('aboutItems', 'socialLinks'));
     }
 }
