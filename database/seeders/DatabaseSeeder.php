@@ -92,5 +92,42 @@ class DatabaseSeeder extends Seeder
         | with links to the company’s social media profiles (e.g. Facebook, Instagram, LinkedIn).
         */
         $this->call(SocialLinkSeeder::class);
+
+        /*
+        |-------------------------------------------------------------------------- 
+        | Call MessageSeeder
+        |-------------------------------------------------------------------------- 
+        | This section triggers the MessageSeeder to populate the "messages" table
+        | with sample messages that include sender information, subject, body, and status.
+        */
+        $this->call(MessageSeeder::class);
+
+        /*
+        |-------------------------------------------------------------------------- 
+        | Call BannerSeeder
+        |-------------------------------------------------------------------------- 
+        | This section triggers the BannerSeeder to populate the "banners" table 
+        | with banner data for the website.
+        */
+        $this->call(BannerSeeder::class);
+
+        /*
+        |-------------------------------------------------------------------------- 
+        | Call CategorySeeder
+        |-------------------------------------------------------------------------- 
+        | This section triggers the CategorySeeder to populate the "categories" table
+        | with sample category data.
+        */
+        $this->call(CategorySeeder::class);
+
+        /*
+        |-------------------------------------------------------------------------- 
+        | Call ProductSeeder
+        |-------------------------------------------------------------------------- 
+        | This section triggers the ProductSeeder to populate the "products" table 
+        | with sample product data including product details such as name, price, etc.
+        */
+        $this->call(ProductSeeder::class);
+
     }
 }

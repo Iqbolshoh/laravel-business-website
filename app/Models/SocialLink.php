@@ -10,6 +10,7 @@ class SocialLink extends Model
         'title',
         'icon',
         'value',
+        'link',
         'is_active',
     ];
 }

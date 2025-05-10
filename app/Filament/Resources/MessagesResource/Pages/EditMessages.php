@@ -12,6 +12,17 @@ class EditMessages extends EditRecord
 
     protected function getHeaderActions(): array
     {
-        return [];
+        return [
+            Actions\DeleteAction::make()->visible(fn() => auth()->user()?->can('message.delete'))
+        ];
+    }
+
+    public function mount($record): void
+    {
+        parent::mount($record);
+
+        if ($this->record->status === 'unread') {
+            $this->record->update(['status' => 'read']);
+        }
     }
 }

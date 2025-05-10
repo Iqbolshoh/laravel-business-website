@@ -44,13 +44,17 @@ class AboutResource extends Resource
                 ->required()
                 ->disabled(fn() => !auth()->user()?->can('about.edit'))
                 ->label('Text 1')
-                ->extraAttributes($disableFileUploadButton),
+                ->extraAttributes($disableFileUploadButton)
+                ->required()
+                ->columnSpanFull(),
 
             RichEditor::make('text_2')
                 ->required()
                 ->disabled(fn() => !auth()->user()?->can('about.edit'))
                 ->label('Text 2')
-                ->extraAttributes($disableFileUploadButton),
+                ->extraAttributes($disableFileUploadButton)
+                ->required()
+                ->columnSpanFull(),
 
             Forms\Components\FileUpload::make('image')
                 ->image()

@@ -58,6 +58,7 @@ class RolePermissionSeeder extends Seeder
                 'category' => ['view', 'create', 'edit', 'delete'],
                 'product' => ['view', 'create', 'edit', 'delete'],
                 'social-link' => ['view', 'edit'],
+                'messages' => ['view', 'delete'],
             ],
 
             /*
@@ -73,7 +74,7 @@ class RolePermissionSeeder extends Seeder
                 'superadmin' => [
                     'permissions' => [], // Automatically assigned all permissions
                 ],
-                'user' => [
+                'manager' => [
                     'permissions' => [
                         'profile' => ['view', 'edit'],
                         'session' => ['view', 'delete'],
@@ -89,6 +90,7 @@ class RolePermissionSeeder extends Seeder
                         'category' => ['view'],
                         'product' => ['view'],
                         'social-link' => ['view'],
+                        'messages' => ['view'],
                     ],
                 ],
             ],
@@ -111,12 +113,12 @@ class RolePermissionSeeder extends Seeder
                         'role' => 'superadmin',
                     ],
                 ],
-                'user' => [
+                'manager' => [
                     [
-                        'name' => 'Simple User',
-                        'email' => 'user@iqbolshoh.uz',
+                        'name' => 'Manager User',
+                        'email' => 'manager@iqbolshoh.uz',
                         'password' => bcrypt('IQBOLSHOH'),
-                        'role' => 'user',
+                        'role' => 'manager',
                     ],
                 ],
             ],

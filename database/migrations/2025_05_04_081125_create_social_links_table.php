@@ -15,10 +15,12 @@ return new class extends Migration {
             $table->string('title');
             $table->string('icon');
             $table->string('value')->nullable();
+            $table->string('link')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.

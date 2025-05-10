@@ -26,25 +26,21 @@ class MessagesResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('sender_name')
-                    ->required(),
+                    ->required()
+                    ->disabled(true),
 
                 Forms\Components\TextInput::make('sender_email')
                     ->email()
-                    ->required(),
+                    ->required()
+                    ->disabled(true),
 
                 Forms\Components\TextInput::make('subject')
-                    ->required(),
+                    ->required()
+                    ->disabled(true),
 
                 Forms\Components\Textarea::make('body')
-                    ->required(),
-
-                Forms\Components\Select::make('status')
-                    ->options([
-                        'new' => 'New',
-                        'read' => 'Read',
-                    ])
                     ->required()
-                    ->default('new'),
+                    ->disabled(true)
             ]);
     }
 
@@ -52,26 +48,22 @@ class MessagesResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('sender_name')->searchable(),
-                Tables\Columns\TextColumn::make('sender_email')->searchable(),
-                Tables\Columns\TextColumn::make('subject')->limit(20)->tooltip(fn($record) => $record->subject),
-                Tables\Columns\TextColumn::make('body')->limit(50)->tooltip(fn($record) => $record->body),
-                Tables\Columns\BadgeColumn::make('status')
-                    ->colors([
-                        'primary' => 'new',
-                        'success' => 'read',
-                    ]),
-                Tables\Columns\TextColumn::make('created_at')->dateTime('Y-m-d H:i'),
+                Tables\Columns\TextColumn::make('id')->label('ID')->sortable()->sortable(),
+                Tables\Columns\TextColumn::make('sender_name')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('sender_email')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('subject')->searchable()->limit(20)->tooltip(fn($record) => $record->subject)->sortable(),
+                Tables\Columns\BadgeColumn::make('status')->colors(['primary' => 'unread', 'success' => 'read'])->sortable(),
+                Tables\Columns\TextColumn::make('created_at')->label('Send at')->since()->sortable(),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make()->visible(fn() => auth()->user()?->can('message.delete')),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\DeleteBulkAction::make()->visible(fn() => auth()->user()?->can('message.delete')),
                 ]),
             ]);
     }
@@ -81,6 +73,17 @@ class MessagesResource extends Resource
         return [
             //
         ];
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        $count = Message::where('status', 'unread')->count();
+        return $count > 0 ? (string) $count : null;
+    }
+
+    public static function getNavigationBadgeColor(): string|null
+    {
+        return 'warning';
     }
 
     public static function getPages(): array

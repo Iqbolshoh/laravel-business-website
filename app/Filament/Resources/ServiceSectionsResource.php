@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ServiceSectionsResource\Pages;
 use App\Models\ServiceSection;
 use Filament\Forms;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -29,6 +30,16 @@ class ServiceSectionsResource extends Resource
 
     public static function form(Form $form): Form
     {
+
+        $disableFileUploadButton = [
+            'x-init' => <<<JS
+                setTimeout(() => {
+                    document.querySelectorAll('trix-toolbar [data-trix-action="attachFiles"]')
+                        .forEach(btn => btn.remove());
+                }, 500);
+            JS,
+        ];
+
         return $form
             ->schema([
                 Forms\Components\TextInput::make('title')
@@ -37,11 +48,11 @@ class ServiceSectionsResource extends Resource
                     ->disabled(fn() => !auth()->user()?->can('service-section.edit'))
                     ->maxLength(255),
 
-                Forms\Components\Textarea::make('text_1')
-                    ->label('Text 1')
+                Forms\Components\TextInput::make('sub_title')
+                    ->label('Sub Title')
                     ->required()
                     ->disabled(fn() => !auth()->user()?->can('service-section.edit'))
-                    ->maxLength(1000),
+                    ->maxLength(255),
 
                 Forms\Components\FileUpload::make('image')
                     ->image()
@@ -56,17 +67,21 @@ class ServiceSectionsResource extends Resource
                     ->acceptedFileTypes(['image/jpeg', 'image/png'])
                     ->disabled(fn() => !auth()->user()?->can('service-section.edit')),
 
-                Forms\Components\TextInput::make('sub_title')
-                    ->label('Sub Title')
+                RichEditor::make('text_1')
                     ->required()
-                    ->disabled(fn() => !auth()->user()?->can('service-section.edit'))
-                    ->maxLength(255),
+                    ->disabled(fn() => !auth()->user()?->can('about.edit'))
+                    ->label('Text 1')
+                    ->extraAttributes($disableFileUploadButton)
+                    ->required()
+                    ->columnSpanFull(),
 
-                Forms\Components\Textarea::make('text_2')
-                    ->label('Text 2')
+                RichEditor::make('text_2')
                     ->required()
-                    ->disabled(fn() => !auth()->user()?->can('service-section.edit'))
-                    ->maxLength(1000),
+                    ->disabled(fn() => !auth()->user()?->can('about.edit'))
+                    ->label('Text 2')
+                    ->extraAttributes($disableFileUploadButton)
+                    ->required()
+                    ->columnSpanFull(),
             ]);
     }
 
