@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Home</title>
+    <title>About Us</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
 
@@ -29,6 +29,20 @@
     @include('includes.header')
 
     <main class="main">
+
+        <!-- Page Title -->
+        <div class="page-title" data-aos="fade">
+            <div class="container">
+                <nav class="breadcrumbs">
+                    <ol>
+                        <li><a href="/">Home</a></li>
+                        <li class="current">About Us</li>
+                    </ol>
+                </nav>
+                <h1>About Us</h1>
+            </div>
+        </div>
+        <!-- End Page Title -->
 
         <!-- About Section -->
         <section id="about" class="section about">
@@ -57,6 +71,29 @@
                 </div>
             </div>
         </section>
+        <!-- End About Section -->
+
+
+        <!-- Statistics Section -->
+        <section id="stats" class="stats section">
+            <div class="container" data-aos="fade-up" data-aos-delay="100">
+                <div class="row gy-4">
+
+                    @foreach ($statistics as $stat)
+                        <div class="col-lg-3 col-md-6">
+                            <div class="stats-item">
+                                <i class="{{ $stat['icon'] }}"></i>
+                                <span data-purecounter-start="0" data-purecounter-end="{{ $stat['count'] }}"
+                                    data-purecounter-duration="1" class="purecounter"></span>
+                                <p><strong>{{ $stat['title'] }}</strong> <span>{{ $stat['description'] }}</span></p>
+                            </div>
+                        </div>
+                    @endforeach
+
+                </div>
+            </div>
+        </section>
+        <!-- End Statistics Section -->
 
     </main>
 

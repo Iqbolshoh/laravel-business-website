@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\About;
 use App\Models\AboutItem;
 use App\Models\SocialLink;
+use App\Models\Statistics;
 
 class AboutController extends Controller
 {
@@ -13,6 +14,7 @@ class AboutController extends Controller
         $aboutData = About::all();
         $serviceItems = AboutItem::all();
         $socialLinks = SocialLink::all();
+        $statistics = Statistics::all();
 
         $aboutItems = [];
         foreach ($aboutData as $about) {
@@ -29,6 +31,6 @@ class AboutController extends Controller
             $aboutItems[$item->about_id]['list_items'][] = $item->bullet_point;
         }
 
-        return view('about', compact('aboutItems', 'socialLinks'));
+        return view('about', compact('aboutItems', 'socialLinks', 'statistics'));
     }
 }
