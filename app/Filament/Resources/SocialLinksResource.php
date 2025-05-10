@@ -46,7 +46,7 @@ class SocialLinksResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('id')->label('ID')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('title')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('value')->searchable()->sortable()->badge()->openUrlInNewTab()->url(fn($record) => $record->value ? $record->link . $record->value : ''),
+                Tables\Columns\TextColumn::make('value')->searchable()->sortable()->badge()->openUrlInNewTab()->url(fn($record) => $record->link && $record->value ? $record->link . $record->value : ''),
                 Tables\Columns\IconColumn::make('is_active')->boolean()->trueIcon('heroicon-o-check-circle')->falseIcon('heroicon-o-x-circle')->sortable(),
             ])
             ->filters([
