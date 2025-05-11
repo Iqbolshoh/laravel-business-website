@@ -7,6 +7,7 @@
     <title>News</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -54,8 +55,8 @@
                                     <div class="col-lg-12">
                                         <article>
                                             <div class="post-img">
-                                                <img src="{{ asset('storage/' . $new->image) }}" alt="{{ $new->title }}"
-                                                    class="img-fluid">
+                                                <img src="{{ $new->image ? asset('storage/' . $new->image) : asset('images/placeholder.jpg') }}"
+                                                    alt="{{ $new->title }}" class="img-fluid">
                                             </div>
                                             <h2 class="title">
                                                 <a href="{{ route('news.show', $new->id) }}">{{ $new->title }}</a>
@@ -93,29 +94,25 @@
                 <div class="col-lg-4 sidebar">
                     <div class="widgets-container">
 
-                        <!-- Search Widget -->
-                        <div class="search-widget widget-item">
-                            <h3 class="widget-title">Search</h3>
-                            <form id="search-form" action="{{ route('news.index') }}" method="GET">
-                                <input type="text" name="search" id="search-input" placeholder="Search news...">
-                                <button type="submit"><i class="bi bi-search"></i></button>
-                            </form>
-                        </div>
-
-                        <div class="recent-posts-widget widget-item">
-                            <h3 class="widget-title">Recent Posts</h3>
-                            @foreach($recentNews as $recent)
-                                <div class="post-item d-flex mb-2">
-                                    <img src="{{ asset('storage/' . $recent->image) }}" alt="" class="flex-shrink-0 me-2"
-                                        width="70">
-                                    <div>
-                                        <h4 class="mb-1"><a
-                                                href="{{ route('news.show', $recent->id) }}">{{ $recent->title }}</a></h4>
-                                        <time
-                                            datetime="{{ $recent->created_at->format('Y-m-d') }}">{{ $recent->created_at->format('M j, Y') }}</time>
+                        <!-- Recent Posts Widget -->
+                        <div class="recent-posts-widget widget-item" id="recent-posts" aria-live="polite">
+                            <h3 class="widget-title">Recent News</h3>
+                            @if($recentNews->isEmpty())
+                                <p>No recent posts available.</p>
+                            @else
+                                @foreach($recentNews as $recent)
+                                    <div class="post-item d-flex mb-2">
+                                        <img src="{{ $recent->image ? asset('storage/' . $recent->image) : asset('images/placeholder.jpg') }}"
+                                            alt="" class="flex-shrink-0 me-2" width="70">
+                                        <div>
+                                            <h4 class="mb-1"><a
+                                                    href="{{ route('news.show', $recent->id) }}">{{ $recent->title }}</a></h4>
+                                            <time
+                                                datetime="{{ $recent->created_at->format('Y-m-d') }}">{{ $recent->created_at->format('M j, Y') }}</time>
+                                        </div>
                                     </div>
-                                </div>
-                            @endforeach
+                                @endforeach
+                            @endif
                         </div>
 
                     </div>
@@ -132,14 +129,17 @@
         <i class="bi bi-arrow-up-short"></i>
     </a>
 
+    <!-- Vendor JS Files -->
     <script src="{{ asset('vendor/aos/aos.js') }}"></script>
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('vendor/glightbox/js/glightbox.min.js') }}"></script>
     <script src="{{ asset('vendor/imagesloaded/imagesloaded.pkgd.min.js') }}"></script>
     <script src="{{ asset('vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
     <script src="{{ asset('vendor/purecounter/purecounter_vanilla.js') }}"></script>
-    <script src="{{ asset('vendor/swiper/swiper-bundle.min.js') }}"></script>
+    <script src="{{ asset('vendor/swiper/swiper-bundle.min.js') }}" defer></script>
     <script src="{{ asset('vendor/waypoints/noframework.waypoints.js') }}"></script>
+
+    <!-- Main JS File -->
     <script src="{{ asset('js/main.js') }}"></script>
 </body>
 

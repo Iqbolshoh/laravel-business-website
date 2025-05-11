@@ -8,11 +8,17 @@ use Illuminate\Http\Request;
 
 class NewsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $news = News::latest()->paginate(5);
+
         $recentNews = News::latest()->take(5)->get();
+
         $socialLinks = SocialLink::all();
+
+        if ($request->wantsJson() || $request->ajax()) {
+            return response()->json($recentNews);
+        }
 
         return view('news.index', compact('news', 'socialLinks', 'recentNews'));
     }
@@ -20,25 +26,11 @@ class NewsController extends Controller
     public function show($id)
     {
         $newsItem = News::findOrFail($id);
-
         $newsItem->incrementView();
 
         $recentNews = News::latest()->take(5)->get();
         $socialLinks = SocialLink::all();
 
         return view('news.show', compact('newsItem', 'socialLinks', 'recentNews'));
-    }
-
-    public function search(Request $request)
-    {
-        $query = $request->get('query');
-
-        $news = News::where('title', 'like', "%$query%")
-            ->orWhere('description', 'like', "%$query%")
-            ->latest()
-            ->take(10)
-            ->get();
-
-        return response()->json($news);
     }
 }

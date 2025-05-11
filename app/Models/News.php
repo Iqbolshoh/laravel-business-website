@@ -9,6 +9,11 @@ class News extends Model
 {
     protected $fillable = ['title', 'description', 'image', 'views'];
 
+    public function incrementView()
+    {
+        $this->increment('views');
+    }
+
     protected static function boot()
     {
         parent::boot();
@@ -27,10 +32,5 @@ class News extends Model
                 }
             }
         });
-    }
-
-    public function incrementView()
-    {
-        $this->increment('views');
     }
 }
