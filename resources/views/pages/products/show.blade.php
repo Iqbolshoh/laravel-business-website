@@ -55,7 +55,7 @@
                         </div>
                         <div class="portfolio-description" data-aos="fade-up" data-aos-delay="300">
                             <h2>Product Description</h2>
-                            <p>{{ $product->product_name }} – {{ $product->description }}</p>
+                            <p>{{ $product->product_name }} – {!! $product->description !!}</p>
                         </div>
                     </div>
                 @else

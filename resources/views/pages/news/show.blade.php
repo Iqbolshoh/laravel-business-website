@@ -48,7 +48,7 @@
                                 </ul>
                             </div>
                             <div class="content">
-                                <p style="color: var(--default-color);">{!! nl2br(e($newsItem->description)) !!}</p>
+                                <p style="color: var(--default-color);">{!! $newsItem->description !!}</p>
                             </div>
                         </article>
                     </div>

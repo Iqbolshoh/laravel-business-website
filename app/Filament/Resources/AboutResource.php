@@ -38,6 +38,7 @@ class AboutResource extends Resource
             Forms\Components\TextInput::make('title')
                 ->required()
                 ->disabled(fn() => !auth()->user()?->can('about.edit'))
+                ->maxLength(255)
                 ->label('Title'),
 
             Forms\Components\FileUpload::make('image')
@@ -59,6 +60,7 @@ class AboutResource extends Resource
                 ->label('Text 1')
                 ->extraAttributes($disableFileUploadButton)
                 ->required()
+                ->maxLength(1000)
                 ->columnSpanFull(),
 
             RichEditor::make('text_2')
@@ -67,6 +69,7 @@ class AboutResource extends Resource
                 ->label('Text 2')
                 ->extraAttributes($disableFileUploadButton)
                 ->required()
+                ->maxLength(1000)
                 ->columnSpanFull(),
         ]);
     }

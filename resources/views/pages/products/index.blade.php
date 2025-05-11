@@ -45,7 +45,7 @@
                                         <img src="{{ asset('storage/' . $imageUrl) }}" class="img-fluid" alt="">
                                         <div class="portfolio-info">
                                             <h4>{{ $product->product_name }}</h4>
-                                            <p>{{ $product->description }}</p>
+                                            <p>{!! $product->description !!}</p>
                                         </div>
                                     </a>
                                 </div>

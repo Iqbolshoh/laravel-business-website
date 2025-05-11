@@ -31,23 +31,22 @@
                     </div>
                     <div class="col-lg-6 order-2 order-lg-1 content">
                         <h3>{{ $about['title'] }}</h3>
-                        <p class="fst-italic">{{ $about['text_1'] }}</p>
+                        <p class="fst-italic">{!!  $about['text_1'] !!}</p>
                         <h4>Our Services:</h4>
                         @if (!empty($about['list_items']))
                             <ul>
                                 @foreach ($about['list_items'] as $item)
-                                    <li><i class="bi bi-check2-all"></i> {{ $item }}</li>
+                                    <li><i class="bi bi-check2-all"></i> {!! $item !!}</li>
                                 @endforeach
                             </ul>
                         @endif
-                        <p>{{ $about['text_2'] }}</p>
+                        <p>{!!  $about['text_2'] !!}</p>
                     </div>
                 @endforeach
             </div>
         </div>
     </section>
     <!-- End About Section -->
-
 
     <!-- Statistics Section -->
     <section id="stats" class="stats section">
@@ -60,7 +59,7 @@
                             <i class="{{ $stat['icon'] }}"></i>
                             <span data-purecounter-start="0" data-purecounter-end="{{ $stat['count'] }}"
                                 data-purecounter-duration="1" class="purecounter"></span>
-                            <p><strong>{{ $stat['title'] }}</strong> <span>{{ $stat['description'] }}</span></p>
+                            <p><strong>{{ $stat['title'] }}</strong> <span>{!! $stat['description'] !!}</span></p>
                         </div>
                     </div>
                 @endforeach

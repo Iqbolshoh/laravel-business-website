@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\FeaturesResource\Pages;
 use App\Models\Feature;
 use Filament\Forms;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -25,17 +26,29 @@ class FeaturesResource extends Resource
 
     public static function form(Form $form): Form
     {
+        $disableFileUploadButton = [
+            'x-init' => <<<JS
+                setTimeout(() => {
+                    document.querySelectorAll('trix-toolbar [data-trix-action="attachFiles"]')
+                        .forEach(btn => btn.remove());
+                }, 500);
+            JS,
+        ];
         return $form
             ->schema([
                 Forms\Components\TextInput::make('title')
                     ->required()
+                    ->maxLength(255)
                     ->label('Title')
                     ->disabled(fn() => !auth()->user()?->can('feature.edit')),
 
-                Forms\Components\Textarea::make('description')
+                RichEditor::make('description')
                     ->required()
                     ->label('Description')
+                    ->extraAttributes($disableFileUploadButton)
+                    ->maxLength(1000)
                     ->disabled(fn() => !auth()->user()?->can('feature.edit')),
+
             ]);
     }
 

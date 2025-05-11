@@ -41,16 +41,19 @@ class BannerResource extends Resource
                 Forms\Components\TextInput::make('title')
                     ->required()
                     ->label('Title')
-                    ->disabled(fn() => !auth()->user()?->can('banner.edit')),
+                    ->disabled(fn() => !auth()->user()?->can('banner.edit'))
+                    ->maxLength(255),
 
                 Forms\Components\TextInput::make('button_text')
                     ->nullable()
                     ->label('Button Text')
-                    ->disabled(fn() => !auth()->user()?->can('banner.edit')),
+                    ->disabled(fn() => !auth()->user()?->can('banner.edit'))
+                    ->maxLength(255),
 
                 Forms\Components\TextInput::make('button_link')
                     ->nullable()
                     ->label('Button Link')
+                    ->maxLength(255)
                     ->disabled(fn() => !auth()->user()?->can('banner.edit')),
 
                 Forms\Components\FileUpload::make('image')
@@ -68,10 +71,8 @@ class BannerResource extends Resource
 
                 RichEditor::make('description')
                     ->required()
-                    ->disabled(fn() => !auth()->user()?->can('about.edit'))
                     ->label('Description')
                     ->extraAttributes($disableFileUploadButton)
-                    ->required()
                     ->disabled(fn() => !auth()->user()?->can('banner.edit'))
                     ->columnSpanFull(),
             ]);

@@ -38,7 +38,7 @@
                         <div class="featured-item position-relative">
                             <div class="icon"><i class="{{ $feature['icon'] }} icon"></i></div>
                             <h4><a href="#" class="stretched-link">{{ $feature['title'] }}</a></h4>
-                            <p>{{ $feature['description'] }}</p>
+                            <p>{!! $feature['description'] !!}</p>
                         </div>
                     </div>
                 @endforeach
@@ -59,16 +59,16 @@
                     </div>
                     <div class="col-lg-6 order-2 order-lg-1 content">
                         <h3>{{ $about['title'] }}</h3>
-                        <p class="fst-italic">{{ $about['text_1'] }}</p>
+                        <p class="fst-italic">{!!  $about['text_1'] !!}</p>
                         <h4>Our Services:</h4>
                         @if (!empty($about['list_items']))
                             <ul>
                                 @foreach ($about['list_items'] as $item)
-                                    <li><i class="bi bi-check2-all"></i> {{ $item }}</li>
+                                    <li><i class="bi bi-check2-all"></i> {!! $item !!}</li>
                                 @endforeach
                             </ul>
                         @endif
-                        <p>{{ $about['text_2'] }}</p>
+                        <p>{!!  $about['text_2'] !!}</p>
                     </div>
                 @endforeach
             </div>
@@ -86,7 +86,7 @@
                             <a href="#" class="stretched-link">
                                 <h3>{{ $service['title'] }}</h3>
                             </a>
-                            <p>{{ $service['description'] }}</p>
+                            <p>{!! $service['description'] !!}</p>
                         </div>
                     </div>
                 @endforeach

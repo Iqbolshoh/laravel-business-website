@@ -8,6 +8,7 @@ use App\Models\Category;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -32,6 +33,14 @@ class ProductsResource extends Resource
 
     public static function form(Form $form): Form
     {
+        $disableFileUploadButton = [
+            'x-init' => <<<JS
+                setTimeout(() => {
+                    document.querySelectorAll('trix-toolbar [data-trix-action="attachFiles"]')
+                        .forEach(btn => btn.remove());
+                }, 500);
+            JS,
+        ];
         return $form->schema([
             Select::make('category_id')
                 ->label('Category')
@@ -43,13 +52,21 @@ class ProductsResource extends Resource
                 ->required()
                 ->maxLength(255),
 
-            Textarea::make('description')
-                ->required(),
-
             TextInput::make('price')
                 ->label('Price ($)')
                 ->numeric()
-                ->required(),
+                ->required()
+                ->minValue(0)
+                ->maxValue(1000000000),
+
+            RichEditor::make('description')
+                ->required()
+                ->label('Description')
+                ->extraAttributes($disableFileUploadButton)
+                ->columnSpanFull()
+                ->disabled(fn() => !auth()->user()?->can('service.edit'))
+                ->maxLength(1000),
+
 
             Repeater::make('images')
                 ->relationship('images')

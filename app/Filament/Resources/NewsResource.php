@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\NewsResource\Pages;
 use App\Models\News;
 use Filament\Forms;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -27,6 +28,14 @@ class NewsResource extends Resource
 
     public static function form(Form $form): Form
     {
+        $disableFileUploadButton = [
+            'x-init' => <<<JS
+                setTimeout(() => {
+                    document.querySelectorAll('trix-toolbar [data-trix-action="attachFiles"]')
+                        .forEach(btn => btn.remove());
+                }, 500);
+            JS,
+        ];
         return $form
             ->schema([
                 Forms\Components\TextInput::make('title')
@@ -35,12 +44,12 @@ class NewsResource extends Resource
                     ->maxLength(255)
                     ->disabled(fn() => !auth()->user()?->can('news.edit')),
 
-                Forms\Components\Textarea::make('description')
-                    ->label('Description')
+                RichEditor::make('description')
                     ->required()
-                    ->maxLength(1000)
-                    ->disabled(fn() => !auth()->user()?->can('news.edit')),
-
+                    ->label('Description')
+                    ->extraAttributes($disableFileUploadButton)
+                    ->disabled(fn() => !auth()->user()?->can('news.edit'))
+                    ->columnSpanFull(),
 
                 Forms\Components\FileUpload::make('image')
                     ->image()

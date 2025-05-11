@@ -46,6 +46,7 @@ class AboutItemResource extends Resource
                     ->label('Text')
                     ->disabled(fn() => !auth()->user()?->can('about-item.edit'))
                     ->extraAttributes($disableFileUploadButton)
+                    ->maxLength(1000)
                     ->required()
                     ->columnSpanFull(),
             ]);

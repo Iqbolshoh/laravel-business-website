@@ -23,7 +23,7 @@
     <section id="skills" class="skills section">
         <div class="container section-title" data-aos="fade-up">
             <h2>{{ $service_sections[0]->title }}</h2>
-            <p>{{ $service_sections[0]->text_1 }}</p>
+            <p>{!! $service_sections[0]->text_1 !!}</p>
         </div>
 
         <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -36,7 +36,7 @@
                 <div class="col-lg-6 pt-4 pt-lg-0 content">
                     <h3>{{ $service_sections[0]->sub_title }}</h3>
                     <p class="fst-italic">
-                        {{ $service_sections[0]->text_2 }}
+                        {!! $service_sections[0]->text_2 !!}
                     </p>
 
                     <div class="skills-content skills-animation">
@@ -70,7 +70,7 @@
                             <a href="#" class="stretched-link">
                                 <h3>{{ $service['title'] }}</h3>
                             </a>
-                            <p>{{ $service['description'] }}</p>
+                            <p>{!! $service['description'] !!}</p>
                         </div>
                     </div>
                 @endforeach

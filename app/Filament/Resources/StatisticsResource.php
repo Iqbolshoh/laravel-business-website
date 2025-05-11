@@ -6,6 +6,7 @@ use App\Filament\Resources\StatisticsResource\Pages;
 use App\Filament\Resources\StatisticsResource\RelationManagers;
 use App\Models\Statistics;
 use Filament\Forms;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -28,6 +29,14 @@ class StatisticsResource extends Resource
 
     public static function form(Form $form): Form
     {
+        $disableFileUploadButton = [
+            'x-init' => <<<JS
+                setTimeout(() => {
+                    document.querySelectorAll('trix-toolbar [data-trix-action="attachFiles"]')
+                        .forEach(btn => btn.remove());
+                }, 500);
+            JS,
+        ];
         return $form
             ->schema([
                 Forms\Components\TextInput::make('title')
@@ -39,13 +48,17 @@ class StatisticsResource extends Resource
                     ->required()
                     ->numeric()
                     ->minValue(0)
+                    ->maxValue(10000000)
                     ->disabled(fn() => !auth()->user()?->can('statistics.edit'))
                     ->helperText('Enter the numeric count value'),
 
-                Forms\Components\Textarea::make('description')
+                RichEditor::make('description')
                     ->required()
-                    ->maxLength(500)
+                    ->label('Description')
+                    ->extraAttributes($disableFileUploadButton)
+                    ->columnSpanFull()
                     ->disabled(fn() => !auth()->user()?->can('statistics.edit'))
+                    ->maxLength(1000)
                     ->helperText('A brief description of the statistic'),
             ]);
     }

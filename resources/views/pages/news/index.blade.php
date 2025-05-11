@@ -43,7 +43,7 @@
                                             </ul>
                                         </div>
                                         <div class="content">
-                                            <p>{{ Str::limit($new->description, 400) }}</p>
+                                            <p>{!!  Str::limit($new->description, 400) !!}</p>
                                             <div class="read-more">
                                                 <a href="{{ route('news.show', $new->id) }}">Read More</a>
                                             </div>

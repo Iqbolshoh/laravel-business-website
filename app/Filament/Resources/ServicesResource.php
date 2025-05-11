@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ServicesResource\Pages;
 use App\Models\Service;
 use Filament\Forms;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -24,6 +25,14 @@ class ServicesResource extends Resource
 
     public static function form(Form $form): Form
     {
+        $disableFileUploadButton = [
+            'x-init' => <<<JS
+                setTimeout(() => {
+                    document.querySelectorAll('trix-toolbar [data-trix-action="attachFiles"]')
+                        .forEach(btn => btn.remove());
+                }, 500);
+            JS,
+        ];
         return $form
             ->schema([
                 Forms\Components\TextInput::make('title')
@@ -31,10 +40,13 @@ class ServicesResource extends Resource
                     ->disabled(fn() => !auth()->user()?->can('service.edit'))
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextArea::make('description')
-                    ->label('Description')
-                    ->disabled(fn() => !auth()->user()?->can('service.edit'))
+
+                RichEditor::make('description')
                     ->required()
+                    ->label('Description')
+                    ->extraAttributes($disableFileUploadButton)
+                    ->columnSpanFull()
+                    ->disabled(fn() => !auth()->user()?->can('service.edit'))
                     ->maxLength(1000),
             ]);
     }
