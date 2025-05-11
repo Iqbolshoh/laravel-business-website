@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\SocialLink;
 use App\Models\Message;
 use Illuminate\Http\Request;
 
@@ -10,8 +8,7 @@ class ContactController extends Controller
 {
     public function index()
     {
-        $socialLinks = SocialLink::all();
-        return view('contact', compact('socialLinks'));
+        return view('pages.contact.index');
     }
 
     public function sendMessage(Request $request)

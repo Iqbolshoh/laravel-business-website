@@ -7,7 +7,6 @@ use App\Models\Feature;
 use App\Models\About;
 use App\Models\AboutItem;
 use App\Models\Service;
-use App\Models\SocialLink;
 
 class HomeController extends Controller
 {
@@ -18,7 +17,6 @@ class HomeController extends Controller
         $aboutData = About::all();
         $serviceItems = AboutItem::all();
         $services = Service::all();
-        $socialLinks = SocialLink::all();
 
         $aboutItems = [];
         foreach ($aboutData as $about) {
@@ -35,6 +33,6 @@ class HomeController extends Controller
             $aboutItems[$item->about_id]['list_items'][] = $item->bullet_point;
         }
 
-        return view('home', compact('banners', 'features', 'aboutItems', 'services', 'socialLinks'));
+        return view('pages.home.index', compact('banners', 'features', 'aboutItems', 'services'));
     }
 }

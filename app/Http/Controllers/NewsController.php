@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\News;
-use App\Models\SocialLink;
 use Illuminate\Http\Request;
 
 class NewsController extends Controller
@@ -14,13 +13,11 @@ class NewsController extends Controller
 
         $recentNews = News::latest()->take(5)->get();
 
-        $socialLinks = SocialLink::all();
-
         if ($request->wantsJson() || $request->ajax()) {
             return response()->json($recentNews);
         }
 
-        return view('news.index', compact('news', 'socialLinks', 'recentNews'));
+        return view('pages.news.index', compact('news', 'recentNews'));
     }
 
     public function show($id)
@@ -29,8 +26,7 @@ class NewsController extends Controller
         $newsItem->incrementView();
 
         $recentNews = News::latest()->take(5)->get();
-        $socialLinks = SocialLink::all();
 
-        return view('news.show', compact('newsItem', 'socialLinks', 'recentNews'));
+        return view('pages.news.show', compact('newsItem', 'recentNews'));
     }
 }
