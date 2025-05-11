@@ -8,19 +8,9 @@ use Illuminate\Http\Request;
 
 class NewsController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        $search = $request->input('search');
-
-        if ($search) {
-            $news = News::where('title', 'like', "%{$search}%")
-                ->orWhere('description', 'like', "%{$search}%")
-                ->latest()
-                ->paginate(5);
-        } else {
-            $news = News::latest()->paginate(5);
-        }
-
+        $news = News::latest()->paginate(5);
         $recentNews = News::latest()->take(5)->get();
         $socialLinks = SocialLink::all();
 
@@ -30,9 +20,25 @@ class NewsController extends Controller
     public function show($id)
     {
         $newsItem = News::findOrFail($id);
+
+        $newsItem->incrementView();
+
         $recentNews = News::latest()->take(5)->get();
         $socialLinks = SocialLink::all();
 
         return view('news.show', compact('newsItem', 'socialLinks', 'recentNews'));
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->get('query');
+
+        $news = News::where('title', 'like', "%$query%")
+            ->orWhere('description', 'like', "%$query%")
+            ->latest()
+            ->take(10)
+            ->get();
+
+        return response()->json($news);
     }
 }

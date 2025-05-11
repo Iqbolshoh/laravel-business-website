@@ -12,7 +12,6 @@ use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 
 class UsersResource extends Resource
@@ -23,11 +22,11 @@ class UsersResource extends Resource
     protected static ?int $navigationSort = 3;
 
     /**
-     * Access Control: Determines if the user can access this page.
+     * Determine whether the current user can access this resource.
      */
     public static function canAccess(): bool
     {
-        return auth()->user()?->hasRole('superadmin');
+        return auth()->user()?->can('user.view') ?? false;
     }
 
     /**
@@ -35,18 +34,25 @@ class UsersResource extends Resource
      */
     public static function form(Form $form): Form
     {
+
+        $shouldDisable = fn($record) => auth()->user()?->hasRole('superadmin') ?
+            $record && $record->id === auth()->id() :
+            $record?->hasRole('superadmin') || auth()->id() === $record?->id || !auth()->user()?->can('user.edit') || self::hasMatchingRoles($record);
+
+        $shouldDisable = $form->getOperation() === 'create' ? false : $shouldDisable;
+
         return $form->schema([
             TextInput::make('name')
                 ->required()
                 ->maxLength(255)
-                ->disabled(fn($record) => $record && $record->hasRole('superadmin')),
+                ->disabled($shouldDisable),
 
             TextInput::make('email')
                 ->email()
                 ->required()
                 ->maxLength(255)
                 ->unique(User::class, 'email', ignoreRecord: true)
-                ->disabled(fn($record) => $record && $record->hasRole('superadmin')),
+                ->disabled($shouldDisable),
 
             TextInput::make('password')
                 ->password()
@@ -55,7 +61,7 @@ class UsersResource extends Resource
                 ->maxLength(255)
                 ->requiredWith('passwordConfirmation')
                 ->dehydrated(fn(?string $state): bool => filled($state))
-                ->disabled(fn($record) => $record && $record->hasRole('superadmin')),
+                ->disabled($shouldDisable),
 
             TextInput::make('passwordConfirmation')
                 ->password()
@@ -65,7 +71,7 @@ class UsersResource extends Resource
                 ->requiredWith('password')
                 ->same('password')
                 ->dehydrated(fn(?string $state): bool => filled($state))
-                ->disabled(fn($record) => $record && $record->hasRole('superadmin')),
+                ->disabled($shouldDisable),
 
             Select::make('roles')
                 ->relationship('roles', 'name')
@@ -74,7 +80,7 @@ class UsersResource extends Resource
                 ->searchable()
                 ->minItems(1)
                 ->options(fn() => Role::where('name', '!=', 'superadmin')->pluck('name', 'id'))
-                ->disabled(fn($record) => $record && $record->hasRole('superadmin')),
+                ->disabled($shouldDisable),
         ]);
     }
 
@@ -88,9 +94,9 @@ class UsersResource extends Resource
                 TextColumn::make('id')->label('ID')->searchable()->sortable(),
                 TextColumn::make('name')->searchable()->sortable(),
                 TextColumn::make('email')->searchable()->sortable(),
-                TextColumn::make('roles.name')->searchable()->sortable()->badge(),
-                TextColumn::make('created_at')->dateTime()->sortable()->label('Created At')->toggleable(),
-                TextColumn::make('updated_at')->dateTime()->sortable()->label('Updated At')->toggleable(),
+                TextColumn::make('roles.name')->sortable()->badge(),
+                TextColumn::make('created_at')->dateTime()->sortable()->label('Created At')->toggleable()->toggledHiddenByDefault(),
+                TextColumn::make('updated_at')->dateTime()->sortable()->label('Updated At')->toggleable()->toggledHiddenByDefault(),
             ])
             ->filters([
                 SelectFilter::make('roles')
@@ -99,14 +105,31 @@ class UsersResource extends Resource
                     ->preload(),
             ])
             ->actions([
-                Tables\Actions\EditAction::make()->visible(fn($record) => !$record->hasRole('superadmin')),
-                Tables\Actions\DeleteAction::make('Delete')->visible(fn($record) => !$record->hasRole('superadmin')),
+                Tables\Actions\EditAction::make()->visible(
+                    fn($record) => auth()->user()?->hasRole('superadmin')
+                    ? $record && $record->id !== auth()->id()
+                    : $record && !$record->hasRole('superadmin') && auth()->user()?->can('user.edit') && auth()->id() !== $record->id && !self::hasMatchingRoles($record)
+                ),
+
+                Tables\Actions\DeleteAction::make()->visible(
+                    fn($record) => auth()->user()?->hasRole('superadmin')
+                    ? $record && $record->id !== auth()->id()
+                    : $record && !$record->hasRole('superadmin') && auth()->user()?->can('user.delete') && auth()->id() !== $record->id && !self::hasMatchingRoles($record)
+                ),
             ])
             ->bulkActions([]);
     }
 
     /**
-     * Relations Configuration: No related models defined.
+     * Checks if the authenticated user has any matching roles with the target user.
+     */
+    public static function hasMatchingRoles($record): bool
+    {
+        return $record?->can('user.view') || $record?->can('user.create') || $record?->can('user.edit') || $record?->can('user.delete');
+    }
+
+    /**
+     * Returns the relationships associated with this resource.
      */
     public static function getRelations(): array
     {

@@ -16,6 +16,7 @@ Route::get('/services', [ServiceController::class, 'index']);
 
 Route::get('/news', [NewsController::class, 'index'])->name('news.index');
 Route::get('/news/{id}', [NewsController::class, 'show'])->name('news.show');
+Route::get('/news/search', [NewsController::class, 'search'])->name('news.search');
 
 Route::get('/products', [ProductsController::class, 'index'])->name('products.index');
 Route::get('/products/{id}', [ProductsController::class, 'show'])->name('products.show');

@@ -3,21 +3,25 @@
 namespace App\Filament\Resources\RolesResource\Pages;
 
 use App\Filament\Resources\RolesResource;
-use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
 use Spatie\Permission\Models\Permission;
+
 
 class CreateRoles extends CreateRecord
 {
     protected static string $resource = RolesResource::class;
 
-    protected array $permissions = [];
-
+    /**
+     * Determine whether the current user can access this resource.
+     */
     public static function canAccess(array $parameters = []): bool
     {
-        return auth()->user()?->hasRole('superadmin');
+        return auth()->user()?->hasRole('superadmin') ?? false;
     }
 
+    /**
+     * Mutates the form data before creating a new role by handling permissions.
+     */
     protected function mutateFormDataBeforeCreate(array $data): array
     {
         $this->permissions = $data['permissions'] ?? [];
@@ -25,6 +29,9 @@ class CreateRoles extends CreateRecord
         return $data;
     }
 
+    /**
+     * Syncs the permissions for the newly created role.
+     */
     protected function afterCreate(): void
     {
         if (!empty($this->permissions)) {
