@@ -33,6 +33,7 @@
                     <li><a href="/" class="">Home</a></li>
                     <li><a href="/about" class="">About Us</a></li>
                     <li><a href="/services" class="">Services</a></li>
+                    <li><a href="/news" class="">News</a></li>
                     <li><a href="/products" class="">Products</a></li>
                     <li><a href="/contact" class="">Contact</a></li>
                 </ul>
@@ -40,7 +41,7 @@
             </nav>
 
             <script>
-                const links=document.querySelectorAll("#navmenu ul li a"),currentUrl=window.location.pathname;links.forEach(e=>{e.getAttribute("href")===currentUrl?e.classList.add("active"):e.classList.remove("active")});
+                const links = document.querySelectorAll("#navmenu ul li a"), currentUrl = window.location.pathname; links.forEach(e => { e.getAttribute("href") === currentUrl ? e.classList.add("active") : e.classList.remove("active") });
             </script>
 
         </div>

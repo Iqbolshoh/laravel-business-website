@@ -33,8 +33,9 @@
             <div class="container">
                 <nav class="breadcrumbs">
                     <ol>
-                        <li><a href="{{ url('/') }}">Home</a></li>
-                        <li class="current">Products details</li>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="{{ route('news.index') }}">Products details</a></li>
+                        <li class="current">{{ Str::limit($product->product_name, 30) }}</li>
                     </ol>
                 </nav>
                 <h1>Products details</h1>

@@ -20,8 +20,9 @@
                 <ul>
                     <li><i class="bi bi-chevron-right"></i> <a href="/">Home</a></li>
                     <li><i class="bi bi-chevron-right"></i> <a href="/about">About Us</a></li>
-                    <li><i class="bi bi-chevron-right"></i> <a href="/products">Products</a></li>
                     <li><i class="bi bi-chevron-right"></i> <a href="/services">Services</a></li>
+                    <li><i class="bi bi-chevron-right"></i> <a href="/news">News</a></li>
+                    <li><i class="bi bi-chevron-right"></i> <a href="/products">Products</a></li>
                     <li><i class="bi bi-chevron-right"></i> <a href="/contact">Contact</a></li>
                 </ul>
             </div>
