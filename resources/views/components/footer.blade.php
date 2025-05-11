@@ -108,6 +108,10 @@
                 <span class="btn-icon"><i class="fa-solid fa-phone"></i></span>
                 Call Us
             </a>
+            <a href="https://iqbolshoh.uz" class="btn" target="_blank">
+                <span class="btn-icon"><i class="fa-solid fa-globe"></i></span>
+                Visit Website
+            </a>
             <a href="https://t.me/iqbolshoh_777" class="btn">
                 <span class="btn-icon"><i class="fas fa-paper-plane"></i></span>
                 Free Consultation

@@ -18,7 +18,7 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        View::composer(['components.header', 'components.footer', 'contact.index'], function ($view) {
+        View::composer(['components.header', 'components.footer', 'pages.contact.index'], function ($view) {
             $view->with('socialLinks', SocialLink::all());
         });
     }

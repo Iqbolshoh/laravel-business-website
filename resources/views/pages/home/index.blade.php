@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
-@section('title', 'All News')
+@section('title', 'Home | Iqbolshoh - Full-Stack Developer')
+@section('description', 'Discover tutorials, coding tips, and web development resources by Iqbolshoh, a passionate full-stack developer and educator.')
+@section('keywords', 'Iqbolshoh, Web Developer, Laravel, PHP, JavaScript, Portfolio, Online Courses, Full-Stack Development, Programming')
+
 @section('content')
     <!-- Hero Section -->
     <section id="hero" class="hero section">

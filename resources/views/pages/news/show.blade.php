@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
-@section('title', 'All News')
+@section('title', 'News Details')
+@section('description', 'Discover tutorials, coding tips, and web development resources by Iqbolshoh, a passionate full-stack developer and educator.')
+@section('keywords', 'Iqbolshoh, Web Developer, Laravel, PHP, JavaScript, Portfolio, Online Courses, Full-Stack Development, Programming')
+
 @section('content')
     <div class="page-title" data-aos="fade">
         <div class="container">
