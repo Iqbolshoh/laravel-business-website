@@ -10,7 +10,7 @@ class NewsController extends Controller
 {
     public function index(Request $request)
     {
-        $news = News::latest()->paginate(5);
+        $news = News::latest()->paginate(3);
 
         $recentNews = News::latest()->take(5)->get();
 
