@@ -16,7 +16,7 @@ class NewsSeeder extends Seeder
             [
                 'title' => 'Laravel Mastermind: Iqbolshoh’s Blade Conversion Project',
                 'description' => 'Iqbolshoh is taking legacy PHP websites and converting them into modern Laravel Blade apps, making code cleaner, faster, and easier to maintain. His work is gaining traction in the developer community.',
-                'image' => 'news-images/01JV0909YBNG6XQ0FS2QD2VQH2.jpg',
+                'image' => 'news-images/01JV1F1WJ31QJH3XCCY9ZEK3T6.jpg',
                 'views' => 453,
             ],
             [

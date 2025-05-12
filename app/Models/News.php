@@ -9,6 +9,13 @@ class News extends Model
 {
     protected $fillable = ['title', 'description', 'image', 'views'];
 
+    // Ma'lumotlarni teskari tartibda olish uchun scope
+    public function scopeOrderByLatest($query)
+    {
+        return $query->orderBy('created_at', 'desc');
+    }
+
+    // Viewlarni oshirish
     public function incrementView()
     {
         $this->increment('views');
@@ -18,6 +25,7 @@ class News extends Model
     {
         parent::boot();
 
+        // Yangilik o‘chirilib ketayotganida tasvirni o‘chirish
         static::deleting(function ($news) {
             $news->deleteImagesFromDescription();
 
@@ -26,6 +34,7 @@ class News extends Model
             }
         });
 
+        // Yangilik yangilanganida eski tasvirni o‘chirish
         static::updating(function ($news) {
             if ($news->isDirty('image')) {
                 $oldImage = $news->getOriginal('image');
@@ -36,6 +45,7 @@ class News extends Model
         });
     }
 
+    // Tasvirlarni tavsifdan o‘chirish
     public function deleteImagesFromDescription()
     {
         $images = $this->extractImages($this->description);
@@ -48,6 +58,7 @@ class News extends Model
         }
     }
 
+    // Tavsifdan tasvirlarni olish
     private function extractImages($content): array
     {
         preg_match_all('/<img[^>]+src="([^">]+)"/', $content, $matches);

@@ -63,12 +63,12 @@ class NewsResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')->label('ID')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('row_number')->label('№')->rowIndex()->sortable(false),
                 Tables\Columns\ImageColumn::make('image')->label('Image')->circular()->sortable(),
                 Tables\Columns\TextColumn::make('title')->label('Title')->sortable()->limit(30)->searchable(),
                 Tables\Columns\TextColumn::make('description')->label('Description')->sortable()->limit(50),
                 Tables\Columns\TextColumn::make('created_at')->label('Created At')->sortable()->dateTime()->since(),
-            ])
+            ])->defaultSort('created_at', 'desc')
             ->filters([
             ])
             ->actions([
