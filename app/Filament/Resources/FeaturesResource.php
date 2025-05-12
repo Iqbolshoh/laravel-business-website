@@ -46,7 +46,6 @@ class FeaturesResource extends Resource
                     ->required()
                     ->label('Description')
                     ->extraAttributes($disableFileUploadButton)
-                    ->maxLength(1000)
                     ->disabled(fn() => !auth()->user()?->can('feature.edit')),
 
             ]);

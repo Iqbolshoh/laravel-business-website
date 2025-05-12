@@ -52,7 +52,7 @@ class AboutResource extends Resource
                 ->downloadable()
                 ->previewable()
                 ->acceptedFileTypes(['image/jpeg', 'image/png'])
-                ->disabled(fn() => !auth()->user()?->can('banner.edit')),
+                ->disabled(fn() => !auth()->user()?->can('about.edit')),
 
             RichEditor::make('text_1')
                 ->required()
@@ -60,7 +60,6 @@ class AboutResource extends Resource
                 ->label('Text 1')
                 ->extraAttributes($disableFileUploadButton)
                 ->required()
-                ->maxLength(1000)
                 ->columnSpanFull(),
 
             RichEditor::make('text_2')
@@ -69,7 +68,6 @@ class AboutResource extends Resource
                 ->label('Text 2')
                 ->extraAttributes($disableFileUploadButton)
                 ->required()
-                ->maxLength(1000)
                 ->columnSpanFull(),
         ]);
     }

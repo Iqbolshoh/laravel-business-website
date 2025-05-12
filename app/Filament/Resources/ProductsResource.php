@@ -46,15 +46,18 @@ class ProductsResource extends Resource
                 ->label('Category')
                 ->options(Category::pluck('name', 'id'))
                 ->searchable()
+                ->disabled(fn() => !auth()->user()?->can('product.edit'))
                 ->required(),
 
             TextInput::make('product_name')
                 ->required()
+                ->disabled(fn() => !auth()->user()?->can('product.edit'))
                 ->maxLength(255),
 
             TextInput::make('price')
                 ->label('Price ($)')
                 ->numeric()
+                ->disabled(fn() => !auth()->user()?->can('product.edit'))
                 ->required()
                 ->minValue(0)
                 ->maxValue(1000000000),
@@ -64,13 +67,12 @@ class ProductsResource extends Resource
                 ->label('Description')
                 ->extraAttributes($disableFileUploadButton)
                 ->columnSpanFull()
-                ->disabled(fn() => !auth()->user()?->can('service.edit'))
-                ->maxLength(1000),
-
+                ->disabled(fn() => !auth()->user()?->can('product.edit')),
 
             Repeater::make('images')
                 ->relationship('images')
                 ->label('Product Images')
+                ->disabled(fn() => !auth()->user()?->can('product.edit'))
                 ->schema([
                     FileUpload::make('image_url')
                         ->image()

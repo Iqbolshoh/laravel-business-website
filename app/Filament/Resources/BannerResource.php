@@ -74,6 +74,7 @@ class BannerResource extends Resource
                     ->label('Description')
                     ->extraAttributes($disableFileUploadButton)
                     ->disabled(fn() => !auth()->user()?->can('banner.edit'))
+                    ->maxLength(500)
                     ->columnSpanFull(),
             ]);
     }

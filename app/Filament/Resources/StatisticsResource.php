@@ -58,7 +58,6 @@ class StatisticsResource extends Resource
                     ->extraAttributes($disableFileUploadButton)
                     ->columnSpanFull()
                     ->disabled(fn() => !auth()->user()?->can('statistics.edit'))
-                    ->maxLength(1000)
                     ->helperText('A brief description of the statistic'),
             ]);
     }

@@ -69,20 +69,18 @@ class ServiceSectionsResource extends Resource
 
                 RichEditor::make('text_1')
                     ->required()
-                    ->disabled(fn() => !auth()->user()?->can('about.edit'))
+                    ->disabled(fn() => !auth()->user()?->can('service-section.edit'))
                     ->label('Text 1')
                     ->extraAttributes($disableFileUploadButton)
                     ->required()
-                    ->maxLength(1000)
                     ->columnSpanFull(),
 
                 RichEditor::make('text_2')
                     ->required()
-                    ->disabled(fn() => !auth()->user()?->can('about.edit'))
+                    ->disabled(fn() => !auth()->user()?->can('service-section.edit'))
                     ->label('Text 2')
                     ->extraAttributes($disableFileUploadButton)
                     ->required()
-                    ->maxLength(1000)
                     ->columnSpanFull(),
             ]);
     }

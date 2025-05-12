@@ -46,8 +46,7 @@ class ServicesResource extends Resource
                     ->label('Description')
                     ->extraAttributes($disableFileUploadButton)
                     ->columnSpanFull()
-                    ->disabled(fn() => !auth()->user()?->can('service.edit'))
-                    ->maxLength(1000),
+                    ->disabled(fn() => !auth()->user()?->can('service.edit')),
             ]);
     }
 
