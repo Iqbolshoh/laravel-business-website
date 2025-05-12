@@ -11,7 +11,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Actions\DeleteBulkAction;
+use Filament\Tables\Actions\DeleteAction;
 
 class NewsResource extends Resource
 {
@@ -28,14 +28,6 @@ class NewsResource extends Resource
 
     public static function form(Form $form): Form
     {
-        $disableFileUploadButton = [
-            'x-init' => <<<JS
-                setTimeout(() => {
-                    document.querySelectorAll('trix-toolbar [data-trix-action="attachFiles"]')
-                        .forEach(btn => btn.remove());
-                }, 500);
-            JS,
-        ];
         return $form
             ->schema([
                 Forms\Components\TextInput::make('title')
@@ -43,13 +35,6 @@ class NewsResource extends Resource
                     ->required()
                     ->maxLength(255)
                     ->disabled(fn() => !auth()->user()?->can('news.edit')),
-
-                RichEditor::make('description')
-                    ->required()
-                    ->label('Description')
-                    ->extraAttributes($disableFileUploadButton)
-                    ->disabled(fn() => !auth()->user()?->can('news.edit'))
-                    ->columnSpanFull(),
 
                 Forms\Components\FileUpload::make('image')
                     ->image()
@@ -63,6 +48,14 @@ class NewsResource extends Resource
                     ->previewable()
                     ->acceptedFileTypes(['image/jpeg', 'image/png'])
                     ->disabled(fn() => !auth()->user()?->can('news.edit')),
+
+                Forms\Components\RichEditor::make('description')
+                    ->required()
+                    ->label('Description')
+                    ->fileAttachmentsDisk('public')
+                    ->fileAttachmentsDirectory('uploads/news')
+                    ->columnSpanFull()
+                    ->disabled(fn() => !auth()->user()?->can('news.edit')),
             ]);
     }
 
@@ -70,34 +63,17 @@ class NewsResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')
-                    ->label('ID')
-                    ->sortable(),
-
-                Tables\Columns\ImageColumn::make('image')
-                    ->label('Image')
-                    ->circular()
-                    ->sortable(),
-
-                Tables\Columns\TextColumn::make('title')
-                    ->label('Title')
-                    ->sortable()
-                    ->searchable(),
-
-                Tables\Columns\TextColumn::make('description')
-                    ->label('Description')
-                    ->sortable()
-                    ->limit(50),
-
-                Tables\Columns\TextColumn::make('created_at')
-                    ->label('Created At')
-                    ->sortable()
-                    ->dateTime(),
+                Tables\Columns\TextColumn::make('id')->label('ID')->sortable()->searchable(),
+                Tables\Columns\ImageColumn::make('image')->label('Image')->circular()->sortable(),
+                Tables\Columns\TextColumn::make('title')->label('Title')->sortable()->limit(30)->searchable(),
+                Tables\Columns\TextColumn::make('description')->label('Description')->sortable()->limit(50),
+                Tables\Columns\TextColumn::make('created_at')->label('Created At')->sortable()->dateTime()->since(),
             ])
             ->filters([
             ])
             ->actions([
                 EditAction::make()->visible(fn() => auth()->user()?->can('news.edit')),
+                DeleteAction::make()->visible(fn() => auth()->user()?->can('news.delete')),
             ]);
     }
 

@@ -19,6 +19,8 @@ class News extends Model
         parent::boot();
 
         static::deleting(function ($news) {
+            $news->deleteImagesFromDescription();
+
             if ($news->image && Storage::disk('public')->exists($news->image)) {
                 Storage::disk('public')->delete($news->image);
             }
@@ -32,5 +34,23 @@ class News extends Model
                 }
             }
         });
+    }
+
+    public function deleteImagesFromDescription()
+    {
+        $images = $this->extractImages($this->description);
+
+        foreach ($images as $file) {
+            $file = str_replace('/storage/', '', parse_url($file, PHP_URL_PATH));
+            if (Storage::disk('public')->exists($file)) {
+                Storage::disk('public')->delete($file);
+            }
+        }
+    }
+
+    private function extractImages($content): array
+    {
+        preg_match_all('/<img[^>]+src="([^">]+)"/', $content, $matches);
+        return $matches[1] ?? [];
     }
 }
