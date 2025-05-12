@@ -4,6 +4,18 @@
 @section('description', 'Discover tutorials, coding tips, and web development resources by Iqbolshoh, a passionate full-stack developer and educator.')
 @section('keywords', 'Iqbolshoh, Web Developer, Laravel, PHP, JavaScript, Portfolio, Online Courses, Full-Stack Development, Programming')
 
+<style>
+.content img,
+.content svg {
+    vertical-align: middle !important;
+    width: 100% !important;
+    height: auto !important;
+}
+.attachment__name, .attachment__size{
+    display: none;
+}
+</style>
+
 @section('content')
     <div class="page-title" data-aos="fade">
         <div class="container">
