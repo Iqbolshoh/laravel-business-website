@@ -1,66 +1,134 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🏢 PHP Business Website  
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+The `php-business-website` is a **modern business website template** built using **PHP** and **HTML/CSS**. This project is designed for businesses looking for a **professional online presence**. The template is **highly customizable**, allowing users to **adapt its design and features** based on their requirements.  
 
-## About Laravel
+![🌍 Business Website](https://github.com/Iqbolshoh/php-business-website/blob/main/assets/img/banner-1.png)  
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## ✨ Project Characteristics  
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+🔹 **🌍 Multi-Purpose:** Suitable for **services, product sales, marketing**, and more.  
+🔹 **📱 Fully Responsive:** Works perfectly on **mobile and desktop** devices.  
+🔹 **🎨 Customizable:** Modify the **design, colors, and content** as needed.  
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+![📊 Business Showcase](https://github.com/Iqbolshoh/php-business-website/blob/main/assets/img/banner-2.png)  
 
-## Learning Laravel
+## 🔑 Admin Panel  
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+The **admin panel** is user-friendly and designed for users **without coding experience**. You can **update text, images, and manage your portfolio** effortlessly.  
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+![🛠️ Admin Panel](https://github.com/Iqbolshoh/php-business-website/blob/main/assets/img/admin-panel-1.png)  
+🖥 **Admin Login:** `iqbolshoh`  
+🔑 **Password:** `IQBOLSHOH`  
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### ⚙️ **Admin Panel Features:** 
 
-## Laravel Sponsors
+✅ **📄 Content Management** – Easily update text, images, and other elements.  
+✅ **🖼️ Portfolio Management** – Add/remove services and products.  
+✅ **👥 User Management** – Manage user accounts and access levels.  
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+![⚙️ Admin Dashboard](https://github.com/Iqbolshoh/php-business-website/blob/main/assets/img/admin-panel-2.png)  
 
-### Premium Partners
+## 🚀 Key Features  
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+🎨 **Modern Design** – A professional layout for businesses.  
+🔗 **Easy Navigation** – Intuitive system for seamless browsing.  
+🖼️ **Portfolio Showcase** – Display your services and products.  
+📩 **Contact Form** – Clients can reach out easily.  
+🛠️ **Admin Panel** – Manage website content effortlessly.  
+🎨 **Customizable Theme** – Choose from multiple color schemes.  
 
-## Contributing
+## 🛠 Installation Guide  
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 📥 1. **Clone the Repository:**  
+```bash
+git clone https://github.com/Iqbolshoh/php-business-website.git
+```
 
-## Code of Conduct
+### 📂 2. **Navigate to the Project Directory:**  
+```bash
+cd php-business-website
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 🌐 3. **Set Up the Website:**  
+- Host it on a server that supports **PHP** (Apache or Nginx).  
+- Open **`http://localhost/php-business-website`** in your browser.  
 
-## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 🖥 Technologies Used
+![HTML](https://img.shields.io/badge/HTML-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+![CSS](https://img.shields.io/badge/CSS-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-%23563D7C.svg?style=for-the-badge&logo=bootstrap&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-%23F7DF1C.svg?style=for-the-badge&logo=javascript&logoColor=black)
+![jQuery](https://img.shields.io/badge/jQuery-%230e76a8.svg?style=for-the-badge&logo=jquery&logoColor=white)
+![PHP](https://img.shields.io/badge/PHP-%23777BB4.svg?style=for-the-badge&logo=php&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-%234479A1.svg?style=for-the-badge&logo=mysql&logoColor=white)
 
-## License
+## 📜 License
+This project is open-source and available under the **MIT License**.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 🤝 Contributing  
+🎯 Contributions are welcome! If you have suggestions or want to enhance the project, feel free to fork the repository and submit a pull request.
+
+## 📬 Connect with Me  
+💬 I love meeting new people and discussing tech, business, and creative ideas. Let’s connect! You can reach me on these platforms:
+
+<div align="center">
+  <table>
+    <tr>
+      <td>
+        <a href="https://iqbolshoh.uz" target="_blank">
+          <img src="https://img.icons8.com/color/48/domain.png" 
+               height="40" width="40" alt="Website" title="Website" />
+        </a>
+      </td>
+      <td>
+        <a href="mailto:iilhomjonov777@gmail.com" target="_blank">
+          <img src="https://github.com/gayanvoice/github-active-users-monitor/blob/master/public/images/icons/gmail.svg"
+               height="40" width="40" alt="Email" title="Email" />
+        </a>
+      </td>
+      <td>
+        <a href="https://github.com/iqbolshoh" target="_blank">
+          <img src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/github.svg"
+               height="40" width="40" alt="GitHub" title="GitHub" />
+        </a>
+      </td>
+      <td>
+        <a href="https://www.linkedin.com/in/iqbolshoh/" target="_blank">
+          <img src="https://github.com/gayanvoice/github-active-users-monitor/blob/master/public/images/icons/linkedin.svg"
+               height="40" width="40" alt="LinkedIn" title="LinkedIn" />
+        </a>
+      </td>
+      <td>
+        <a href="https://t.me/iqbolshoh_777" target="_blank">
+          <img src="https://github.com/gayanvoice/github-active-users-monitor/blob/master/public/images/icons/telegram.svg"
+               height="40" width="40" alt="Telegram" title="Telegram" />
+        </a>
+      </td>
+      <td>
+        <a href="https://wa.me/998997799333" target="_blank">
+          <img src="https://github.com/gayanvoice/github-active-users-monitor/blob/master/public/images/icons/whatsapp.svg"
+               height="40" width="40" alt="WhatsApp" title="WhatsApp" />
+        </a>
+      </td>
+      <td>
+        <a href="https://instagram.com/iqbolshoh_777" target="_blank">
+          <img src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg"
+               height="40" width="40" alt="Instagram" title="Instagram" />
+        </a>
+      </td>
+      <td>
+        <a href="https://x.com/iqbolshoh_777" target="_blank">
+          <img src="https://img.shields.io/badge/X-000000?style=for-the-badge&logo=x&logoColor=white"
+               height="40" width="40" alt="X" title="X (Twitter)" />
+        </a>
+      </td>
+      <td>
+        <a href="https://www.youtube.com/@Iqbolshoh_777" target="_blank">
+          <img src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/youtube.svg"
+               height="40" width="40" alt="YouTube" title="YouTube" />
+        </a>
+      </td>
+    </tr>
+  </table>
+</div>
